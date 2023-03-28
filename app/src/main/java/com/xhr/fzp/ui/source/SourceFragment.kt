@@ -3,10 +3,10 @@ package com.xhr.fzp.ui.source
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.xhr.fzp.base.BaseFragment
-import com.xhr.fzp.databinding.FragmentArticleBinding
+import com.xhr.fzp.databinding.FragmentSourceBinding
 import com.xhr.fzp.logic.model.Tag
 
-class SourceFragment(private val tags: List<Tag>) : BaseFragment<FragmentArticleBinding>() {
+class SourceFragment(private val tags: List<Tag>) : BaseFragment<FragmentSourceBinding>() {
 
     private val viewModel by lazy { ViewModelProvider(this)[SourceViewModel::class.java] }
     private lateinit var adapter: SourceAdapter

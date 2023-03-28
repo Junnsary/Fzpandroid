@@ -141,4 +141,14 @@ object Repository {
         }
     }
 
+    fun getVideoInfo(sourceId: Int)= fire() {
+        val result = FzpNetwork.getVideoInfo(sourceId)
+        if (result.success) {
+            val data = result.data
+            Result.success(data)
+        } else {
+            Result.failure(RuntimeException("response success is ${result.success}"))
+        }
+    }
+
 }

@@ -3,7 +3,7 @@ package com.xhr.fzp.logic.dao
 import android.content.Context
 import androidx.core.content.edit
 import com.google.gson.Gson
-import com.xhr.fzp.FZPApplication
+import com.xhr.fzp.FzpApplication
 import com.xhr.fzp.logic.model.User
 
 object LoginDao {
@@ -23,6 +23,6 @@ object LoginDao {
 
     fun isUserLogin() = sharedPreferences().contains(USER)
 
-    private fun sharedPreferences() = FZPApplication.context
+    private fun sharedPreferences() = FzpApplication.context
         .getSharedPreferences(USER_INFO, Context.MODE_PRIVATE)
 }

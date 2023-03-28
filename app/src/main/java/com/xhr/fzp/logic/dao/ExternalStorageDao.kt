@@ -3,7 +3,7 @@ package com.xhr.fzp.logic.dao
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Environment
-import com.xhr.fzp.FZPApplication
+import com.xhr.fzp.FzpApplication
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
@@ -12,7 +12,7 @@ object ExternalStorageDao {
 
     const val USER_AVATAR = "user_avatar"
 
-    private val externalFilesPicture = FZPApplication.context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+    private val externalFilesPicture = FzpApplication.context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
 
     fun savePicture(fileName: String, pic: Bitmap) {
         val fos = FileOutputStream(File(externalFilesPicture, fileName))

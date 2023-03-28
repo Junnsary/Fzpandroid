@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.xhr.fzp.R
 import com.xhr.fzp.logic.model.Source
 import com.xhr.fzp.logic.network.FzpServiceCreator
+import com.xhr.fzp.ui.detail.DetailActivity
 import com.xhr.fzp.utils.useGlideSetImage
 
 class SourceAdapter(private val fragment: Fragment, private val sourcesList: ArrayList<Source>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -58,12 +59,18 @@ class SourceAdapter(private val fragment: Fragment, private val sourcesList: Arr
                 holder.name.text = source.manager.name
                 holder.datetime.text = source.createdAt.toString()
                 useGlideSetImage(fragment, FzpServiceCreator.getArticleImageURL(source.cover), holder.cover)
+                holder.itemView.setOnClickListener {
+                    fragment.activity?.let { it1 -> DetailActivity.actionStart(it1, source.id, source.tag.id, DetailActivity.ARTICLE) }
+                }
             }
             is VideoHolder -> {
                 holder.title.text = source.title
                 holder.name.text = source.manager.name
                 holder.datetime.text = source.createdAt.toString()
                 useGlideSetImage(fragment, FzpServiceCreator.getVideoImageURL(source.cover), holder.cover)
+                holder.itemView.setOnClickListener {
+                    fragment.activity?.let { it1 -> DetailActivity.actionStart(it1, source.id, source.tag.id, DetailActivity.VIDEO) }
+                }
             }
         }
     }

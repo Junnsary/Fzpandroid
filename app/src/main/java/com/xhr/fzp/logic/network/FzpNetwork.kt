@@ -24,17 +24,25 @@ object FzpNetwork {
     /**
      * 获取api接口数据
      */
-    suspend fun getArticleListByTag(tagId: String) = articleService.getArticleListByTag(tagId).await()
+    suspend fun getArticleListByTag(tagId: String) =
+        articleService.getArticleListByTag(tagId).await()
+
     suspend fun getArticle(id: Int) = articleService.getArticle(id).await()
     suspend fun getVideoListByTag(tagId: Int) = videoService.getVideoListByTag(tagId).await()
     suspend fun getTags(type: String, category: String) = tagService.getTags(type, category).await()
     suspend fun getKnowledge() = tagService.getKnowledge().await()
-    suspend fun getSourceList(type: String, tagId: String) = sourceService.getSourceList(type, tagId).await()
+    suspend fun getSourceList(type: String, tagId: String) =
+        sourceService.getSourceList(type, tagId).await()
+
     suspend fun getRecommList(num: Int) = sourceService.getRecommList(num).await()
-    suspend fun userSignup(user: User) = userService.userSignup(user.id, user.email, user.name, user.passwd).await()
+    suspend fun userSignup(user: User) =
+        userService.userSignup(user.id, user.email, user.name, user.passwd).await()
+
     suspend fun userLogin(user: User) = userService.userLogin(user.id, user.passwd).await()
     suspend fun getAvatar(fileName: String) = imageService.getAvatar(fileName).await()
-    suspend fun getCommentList(sourceId: Int, tagId: Int) = commentService.getCommentList(sourceId, tagId).await()
+    suspend fun getCommentList(sourceId: Int, tagId: Int) =
+        commentService.getCommentList(sourceId, tagId).await()
+    suspend fun getVideoInfo(sourceId: Int) = videoService.getVideoInfo(sourceId).await()
 
 
     private suspend fun <T> Call<T>.await(): T {
@@ -45,13 +53,11 @@ object FzpNetwork {
                     if (body != null) continuation.resume(body)
                     else continuation.resumeWithException(RuntimeException("response body is null"))
                 }
+
                 override fun onFailure(call: Call<T>, t: Throwable) {
                     continuation.resumeWithException(t)
                 }
             })
         }
     }
-
-
-
 }

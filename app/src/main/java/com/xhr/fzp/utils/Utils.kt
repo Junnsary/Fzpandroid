@@ -7,7 +7,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
-import com.xhr.fzp.FZPApplication
+import com.xhr.fzp.FzpApplication
 import com.xhr.fzp.base.BaseActivity
 import com.xhr.fzp.base.BaseFragment
 
@@ -16,14 +16,14 @@ import com.xhr.fzp.base.BaseFragment
  * @param duration Toast显示的时间长短
  */
 fun String.showToast(duration: Int = Toast.LENGTH_SHORT) {
-    Toast.makeText(FZPApplication.context, this, duration).show()
+    Toast.makeText(FzpApplication.context, this, duration).show()
 }
 
 /**
  * 同样更字符串对象扩展函数一样，作为Int对象的扩展函数
  */
 fun Int.showToast(duration: Int = Toast.LENGTH_SHORT) {
-    Toast.makeText(FZPApplication.context, this, duration).show()
+    Toast.makeText(FzpApplication.context, this, duration).show()
 }
 
 /**

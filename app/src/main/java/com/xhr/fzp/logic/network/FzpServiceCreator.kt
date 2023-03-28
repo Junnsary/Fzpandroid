@@ -7,10 +7,11 @@ object FzpServiceCreator {
 
     private const val BASE_URL = "http://10.0.2.2:3000/"
     //用户头像的位置
-    private const val PUBLIC = "uploads/images/"
-    private const val AVATAR_URL = "${PUBLIC}avatars/"
-    private const val VIDEO_RESOURCE_URL = "${PUBLIC}videos/"
-    private const val ARTICLE_RESOURCE_URL = "${PUBLIC}articles/"
+    private const val PUBLIC_IMAGE = "uploads/images/"
+    private const val PUBLIC_VIDEO = "uploads/videos/"
+    private const val AVATAR_URL = "${PUBLIC_IMAGE}avatars/"
+    private const val VIDEO_IMAGE_URL = "${PUBLIC_IMAGE}videos/"
+    private const val ARTICLE_IMAGE_URL = "${PUBLIC_IMAGE}articles/"
     private const val GET_ARTICLE = "api/article/"
 
     fun getUserAvatarUrl(fileName: String) : String {
@@ -18,7 +19,7 @@ object FzpServiceCreator {
     }
 
     fun getVideoImageURL(fileName: String) : String {
-        return BASE_URL + VIDEO_RESOURCE_URL + fileName
+        return BASE_URL + VIDEO_IMAGE_URL + fileName
     }
 
     fun getArticleURL(id: Int) : String {
@@ -26,7 +27,12 @@ object FzpServiceCreator {
     }
 
     fun getArticleImageURL(fileName: String) : String {
-        return BASE_URL + ARTICLE_RESOURCE_URL + fileName
+        return BASE_URL + ARTICLE_IMAGE_URL + fileName
+    }
+
+
+    fun getVideoFilePath(fileName: String): String {
+        return BASE_URL + PUBLIC_VIDEO + fileName
     }
 
     private val retrofit = Retrofit.Builder()
@@ -49,5 +55,6 @@ object FzpServiceCreator {
         // create(String::class.java)
         return create(T::class.java)
     }
+
 
 }

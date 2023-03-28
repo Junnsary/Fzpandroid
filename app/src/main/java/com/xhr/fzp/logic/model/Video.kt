@@ -1,9 +1,10 @@
 package com.xhr.fzp.logic.model
 
+import com.google.gson.annotations.SerializedName
 import java.util.*
 
 class Video(
-    val fileName: String,
+    @SerializedName("file_name") val fileName: String,
     id: Int,
     title: String,
     createdAt: Date,
