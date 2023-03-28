@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<network-security-config>-->
+<!--    &lt;!&ndash;  默认配置，是否开启Http流量允许&ndash;&gt;-->
+<!--    <base-config cleartextTrafficPermitted="true"></base-config>-->
+<!--    &lt;!&ndash;  特例配置，配置某个域名是否开启Http流量允许&ndash;&gt;-->
+<!--    <domain-config cleartextTrafficPermitted="true">-->
+<!--        <domain includeSubdomains="true">android.bugly.qq.com</domain>-->
+<!--        <domain includeSubdomains="true">155.25.62.33</domain>-->
+<!--    </domain-config>-->
+<!--</network-security-config>-->
+
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Fzp</string>
+    <string name="activity_mian_study_str">学习</string>
+    <string name="activity_main_case_str">案例</string>
+    <string name="activity_main_mine_str">我的</string>
+    <string name="avatar">avatar</string>
+</resources>
