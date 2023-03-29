@@ -6,6 +6,7 @@ import com.xhr.fzp.logic.dao.ExternalStorageDao
 import com.xhr.fzp.logic.dao.LoginDao
 import com.xhr.fzp.logic.model.User
 import com.xhr.fzp.logic.network.FzpNetwork
+import com.xhr.fzp.ui.detail.DetailViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
 
@@ -149,6 +150,26 @@ object Repository {
         } else {
             Result.failure(RuntimeException("response success is ${result.success}"))
         }
+    }
+
+    fun isUserCollect(collectionData: DetailViewModel.CollectionData) = fire() {
+        val result = FzpNetwork.isUserCollect(collectionData)
+        if (result.success) {
+            val data = result.data
+            Result.success(data)
+        } else {
+            Result.failure(RuntimeException("response success is ${result.success}"))
+        }
+    }
+
+    fun addUserCollection(collectionData: DetailViewModel.CollectionData) = fire(){
+        val result = FzpNetwork.addUserCollection(collectionData)
+        Result.success(result)
+    }
+
+    fun cancelUserCollection(collectionData: DetailViewModel.CollectionData) = fire(){
+        val result = FzpNetwork.cancelUserCollection(collectionData)
+        Result.success(result)
     }
 
 }

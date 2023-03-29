@@ -1,6 +1,7 @@
 package com.xhr.fzp.logic.network
 
 import com.xhr.fzp.logic.model.User
+import com.xhr.fzp.ui.detail.DetailViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,6 +21,8 @@ object FzpNetwork {
     private val userService = FzpServiceCreator.create<UserService>()
     private val imageService = FzpServiceCreator.create<ImageService>()
     private val commentService = FzpServiceCreator.create<CommentService>()
+    private val collectionService = FzpServiceCreator.create<CollectionService>()
+
 
     /**
      * 获取api接口数据
@@ -43,7 +46,14 @@ object FzpNetwork {
     suspend fun getCommentList(sourceId: Int, tagId: Int) =
         commentService.getCommentList(sourceId, tagId).await()
     suspend fun getVideoInfo(sourceId: Int) = videoService.getVideoInfo(sourceId).await()
+    suspend fun isUserCollect(collectionData: DetailViewModel.CollectionData)
+    = collectionService.isUserCollect(collectionData.sourceId, collectionData.tagId, collectionData.userId).await()
 
+    suspend fun addUserCollection(collectionData: DetailViewModel.CollectionData)
+    = collectionService.addUserCollection(collectionData.sourceId, collectionData.tagId, collectionData.userId).await()
+
+    suspend fun cancelUserCollection(collectionData: DetailViewModel.CollectionData)
+    = collectionService.cancelUserCollection(collectionData.sourceId, collectionData.tagId, collectionData.userId).await()
 
     private suspend fun <T> Call<T>.await(): T {
         return suspendCoroutine { continuation ->
@@ -60,4 +70,8 @@ object FzpNetwork {
             })
         }
     }
+
+
+
+
 }

@@ -3,14 +3,17 @@ package com.xhr.fzp.ui.detail
 import android.content.Context
 import android.content.Intent
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.xhr.fzp.R
 import com.xhr.fzp.base.BaseActivity
 import com.xhr.fzp.databinding.ActivityDetailBinding
+import com.xhr.fzp.mode.state.UserContext
 import com.xhr.fzp.ui.article.ArticleFragment
 import com.xhr.fzp.ui.comment.CommentFragment
 import com.xhr.fzp.ui.video.VideoFragment
 import com.xhr.fzp.utils.LogUtil
 import com.xhr.fzp.utils.replaceFragment
+import com.xhr.fzp.utils.showToast
 
 class DetailActivity : BaseActivity<ActivityDetailBinding>() {
     /**
@@ -21,8 +24,11 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
     private var sourceId : Int = 0
     private var tagId : Int = 0
     private var type : Int = 0
+    private var isCollect = false
+    private var collectClick = true
     private lateinit var commentFragment: CommentFragment
     private lateinit var fragment: Fragment
+    val viewModel by lazy { ViewModelProvider(this)[DetailViewModel::class.java] }
 
     companion object {
         private const val SOURCE_ID = "SOURCE_ID"
@@ -47,12 +53,76 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
         type = intent.getIntExtra(TYPE, 0)
         LogUtil.d(this, "${sourceId} , ${tagId} ")
         when (type) {
-            ARTICLE -> fragment = ArticleFragment(sourceId)
-            VIDEO -> fragment = VideoFragment(sourceId)
+            ARTICLE -> {
+                fragment = ArticleFragment(sourceId)
+//                binding.tvTypeTitle.text = "文章学习"
+            }
+            VIDEO ->{
+                fragment = VideoFragment(sourceId)
+//                binding.rlActionbar.visibility = View.GONE
+//                binding.tvTypeTitle.text = "视频学习"
+            }
+        }
+
+        viewModel.isUserCollectLD.observe(this) { result ->
+            val data = result.getOrNull()
+            data?.let {
+                if (it) {
+                    LogUtil.d(this, "已经收藏")
+                    binding.tvCollect.setTextColor(getColor(android.R.color.holo_red_dark))
+                    isCollect = true
+                }
+            }
+        }
+
+        viewModel.getAddUserCollectionLD.observe(this) { result ->
+            val data = result.getOrNull()
+            if (data != null) {
+                if (data.success) {
+                    "添加收藏成功".showToast()
+                    binding.tvCollect.setTextColor(getColor(android.R.color.holo_red_dark))
+                    isCollect = true
+                } else {
+                    "添加收藏失败".showToast()
+                }
+                collectClick = true
+            }
+        }
+
+        viewModel.getCancelUserCollectionLD.observe(this) {result ->
+            val data = result.getOrNull()
+            if (data != null) {
+                if (data.success) {
+                    "取消收藏成功".showToast()
+                    binding.tvCollect.setTextColor(getColor(R.color.black))
+                    isCollect = false
+                } else {
+                    "取消收藏失败".showToast()
+                }
+                collectClick = true
+            }
         }
     }
 
     override fun initView() {
+        if (viewModel.isUserLogin()) {
+//            LogUtil.d(this, "已登录")
+            viewModel.isUserCollect(sourceId, tagId)
+        }
+
+        binding.tvCollect.setOnClickListener {
+            UserContext.collect(this) {
+                if (collectClick) {
+                    if (isCollect) {
+                        viewModel.cancelUserCollection(sourceId, tagId)
+                    } else {
+                        viewModel.addUserCollection(sourceId, tagId)
+                    }
+                    collectClick = false
+                }
+            }
+        }
+
         replaceFragment(R.id.fl_detail, fragment)
 
         //添加评论fragment
@@ -61,6 +131,14 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
 
         binding.tvReturn.setOnClickListener {
             finish()
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (viewModel.isUserLogin()) {
+//            LogUtil.d(this, "已登录")
+            viewModel.isUserCollect(sourceId, tagId)
         }
     }
 }
