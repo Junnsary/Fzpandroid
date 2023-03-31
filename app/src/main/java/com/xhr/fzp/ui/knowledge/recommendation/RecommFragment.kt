@@ -4,9 +4,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.xhr.fzp.base.BaseFragment
 import com.xhr.fzp.databinding.FragmentRecommBinding
+import com.xhr.fzp.logic.interfaces.IRefresh
 import com.xhr.fzp.ui.source.SourceAdapter
 
-class RecommFragment : BaseFragment<FragmentRecommBinding>() {
+class RecommFragment : BaseFragment<FragmentRecommBinding>(), IRefresh {
 
     val viewModel by lazy { ViewModelProvider(this)[RecommViewModel::class.java]}
 
@@ -20,15 +21,30 @@ class RecommFragment : BaseFragment<FragmentRecommBinding>() {
                 viewModel.recommList.addAll(data)
                 adapter.notifyDataSetChanged()
             }
+            stopRefresh()
         }
-
     }
 
     override fun initView() {
         adapter = SourceAdapter(this, viewModel.recommList)
         binding.rvRecommendation.layoutManager = LinearLayoutManager(activity)
         binding.rvRecommendation.adapter = adapter
+        refresh()
+    }
+
+    override fun initListener() {
+        binding.srlRefreshData.setOnRefreshListener {
+            refresh()
+        }
+    }
+
+    override fun refresh() {
+        binding.srlRefreshData.isRefreshing = true
         viewModel.getRecommList(10)
+    }
+
+    override fun stopRefresh() {
+        binding.srlRefreshData.isRefreshing = false
     }
 
 }

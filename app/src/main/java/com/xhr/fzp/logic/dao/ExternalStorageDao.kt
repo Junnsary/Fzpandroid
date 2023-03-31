@@ -16,20 +16,25 @@ object ExternalStorageDao {
 
     fun savePicture(fileName: String, pic: Bitmap) {
         val fos = FileOutputStream(File(externalFilesPicture, fileName))
-        pic.compress(Bitmap.CompressFormat.JPEG, 100, fos)
+        pic.compress(Bitmap.CompressFormat.JPEG, 80, fos)
         fos.flush()
         fos.close()
     }
 
-    fun isLocalAvatar() : Boolean {
+    fun isLocalUserAvatar() : Boolean {
         val file = File(externalFilesPicture, USER_AVATAR)
         return file.exists()
     }
 
-    fun getLocalAvatar(): Bitmap {
+    fun getLocalUserAvatar(): Bitmap {
         val fis = FileInputStream(File(externalFilesPicture, USER_AVATAR))
         val bitmap = BitmapFactory.decodeStream(fis)
         fis.close()
         return bitmap
+    }
+
+    fun clearLocalUserAvatar() {
+        val userAvatar = File(externalFilesPicture, USER_AVATAR)
+        userAvatar.delete()
     }
 }

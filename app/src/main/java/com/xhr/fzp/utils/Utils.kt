@@ -1,6 +1,7 @@
 package com.xhr.fzp.utils
 
 import android.content.Context
+import android.content.Intent
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -62,4 +63,12 @@ fun useGlideSetImage(fragment: Fragment, url: String, imageView: ImageView){
         .with(fragment)
         .load(url)
         .into(imageView)
+}
+
+/**
+ * 快捷启动activity
+ */
+
+inline fun <reified T> Context.quickStartActivity() {
+    startActivity(Intent(this, T::class.java))
 }

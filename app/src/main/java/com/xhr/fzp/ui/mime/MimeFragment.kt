@@ -1,11 +1,16 @@
 package com.xhr.fzp.ui.mime
 
 import android.graphics.BitmapFactory
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
+import com.xhr.fzp.R
 import com.xhr.fzp.base.BaseFragment
 import com.xhr.fzp.databinding.FragmentMimeBinding
 import com.xhr.fzp.mode.state.UserContext
+import com.xhr.fzp.ui.favorites.FavoritesActivity
+import com.xhr.fzp.ui.setting.SettingActivity
 import com.xhr.fzp.utils.LogUtil
+import com.xhr.fzp.utils.quickStartActivity
 
 class MimeFragment :  BaseFragment<FragmentMimeBinding>(){
 
@@ -30,10 +35,11 @@ class MimeFragment :  BaseFragment<FragmentMimeBinding>(){
 
     override fun initView() {
         if (viewModel.isUserLogin()) {
-            LogUtil.d(this, "有用户！")
-            setLoginInfo()
+//            LogUtil.d(this, "有用户！")
+            setUserLogin()
         } else {
-            LogUtil.d(this, "没有用户！")
+//            LogUtil.d(this, "没有用户！")
+            setUserLogout()
         }
 
         binding.ivAvatar.setOnClickListener {
@@ -41,7 +47,22 @@ class MimeFragment :  BaseFragment<FragmentMimeBinding>(){
         }
     }
 
-    private fun setLoginInfo() {
+    override fun initListener() {
+        binding.rlSetting.setOnClickListener {
+            activity?.let{
+                it.quickStartActivity<SettingActivity>()
+            }
+        }
+
+        binding.rlFavorites.setOnClickListener {
+            activity?.let{
+                it.quickStartActivity<FavoritesActivity>()
+            }
+        }
+    }
+
+
+    private fun setUserLogin() {
         isLogin = true
         //获取用户数据
         val user = viewModel.getSavedUser()
@@ -59,15 +80,24 @@ class MimeFragment :  BaseFragment<FragmentMimeBinding>(){
         } else {
             viewModel.getNetAvatar(user.avatar)
         }
+
+        binding.llOptions.visibility = View.VISIBLE
     }
 
     override fun onStart() {
         super.onStart()
         //如果前面在创建的时候 已经登录过了，就不操作了，如果没有就是说
-        if (!isLogin && viewModel.isUserLogin()) {
-            setLoginInfo()
+        if (viewModel.isUserLogin()) {
+            setUserLogin()
+        }else{
+            setUserLogout()
         }
     }
 
+    private fun setUserLogout() {
+        binding.ivAvatar.setImageResource(R.mipmap.logout_avatar)
+        binding.tvUserName.text = getString(R.string.user_logout)
+        binding.llOptions.visibility = View.GONE
+    }
 
 }

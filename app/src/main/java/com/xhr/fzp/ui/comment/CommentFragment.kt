@@ -45,4 +45,5 @@ class CommentFragment(private val sourceId: Int, private val tagId: Int): BaseFr
     fun setSendComment(flag: Boolean) {
         isSendComment = flag
     }
+
 }

@@ -80,7 +80,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
             }
         }
 
-        viewModel.getAddUserCollectionLD.observe(this) { result ->
+        viewModel.getAddUserFavoritesLD.observe(this) { result ->
             val data = result.getOrNull()
             if (data != null) {
                 if (data.success) {
@@ -94,7 +94,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
             }
         }
 
-        viewModel.getCancelUserCollectionLD.observe(this) { result ->
+        viewModel.getCancelUserFavoritesLD.observe(this) { result ->
             val data = result.getOrNull()
             if (data != null) {
                 if (data.success) {
@@ -143,9 +143,9 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
             UserContext.collect(this) {
                 if (collectClick) {
                     if (isCollect) {
-                        viewModel.cancelUserCollection(sourceId, tagId)
+                        viewModel.cancelUserFavorites(sourceId, tagId)
                     } else {
-                        viewModel.addUserCollection(sourceId, tagId)
+                        viewModel.addUserFavorites(sourceId, tagId)
                     }
                     collectClick = false
                 }

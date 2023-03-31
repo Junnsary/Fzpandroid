@@ -4,9 +4,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.xhr.fzp.base.BaseFragment
 import com.xhr.fzp.databinding.FragmentSourceBinding
+import com.xhr.fzp.logic.interfaces.IRefresh
 import com.xhr.fzp.logic.model.Tag
 
-class SourceFragment(private val tags: List<Tag>) : BaseFragment<FragmentSourceBinding>() {
+class SourceFragment(private val tags: List<Tag>) : BaseFragment<FragmentSourceBinding>(), IRefresh {
 
     private val viewModel by lazy { ViewModelProvider(this)[SourceViewModel::class.java] }
     private lateinit var adapter: SourceAdapter
@@ -21,13 +22,29 @@ class SourceFragment(private val tags: List<Tag>) : BaseFragment<FragmentSourceB
                 viewModel.sourceList.addAll(articles)
                 adapter.notifyDataSetChanged()
             }
+            stopRefresh()
         }
     }
 
+
     override fun initView() {
-        viewModel.getSourceList(tags)
+        refresh()
         binding.rvArticleList.adapter = adapter
         binding.rvArticleList.layoutManager = LinearLayoutManager(activity)
     }
 
+    override fun initListener() {
+        binding.srlRefreshData.setOnRefreshListener {
+            refresh()
+        }
+    }
+
+    override fun refresh() {
+        viewModel.getSourceList(tags)
+        binding.srlRefreshData.isRefreshing = true
+    }
+
+    override fun stopRefresh() {
+        binding.srlRefreshData.isRefreshing = false
+    }
 }

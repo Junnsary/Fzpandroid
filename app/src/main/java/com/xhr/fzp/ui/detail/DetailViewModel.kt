@@ -8,14 +8,14 @@ import com.xhr.fzp.logic.Repository
 class DetailViewModel : ViewModel() {
     fun isUserLogin() = Repository.isUserLogin()
 
-    private val getCollectionInfoLD = MutableLiveData<CollectionData>()
-    val isUserCollectLD = getCollectionInfoLD.switchMap { result ->
+    private val getFavoritesInfoLD = MutableLiveData<FavoritesData>()
+    val isUserCollectLD = getFavoritesInfoLD.switchMap { result ->
         Repository.isUserCollect(result)
     }
 
-    private val addUserCollectionLD = MutableLiveData<CollectionData>()
-    val getAddUserCollectionLD = addUserCollectionLD.switchMap { result ->
-        Repository.addUserCollection(result)
+    private val addUserFavoritesLD = MutableLiveData<FavoritesData>()
+    val getAddUserFavoritesLD = addUserFavoritesLD.switchMap { result ->
+        Repository.addUserFavorites(result)
     }
 
     private val addUserCommentLD = MutableLiveData<CommentData>()
@@ -23,9 +23,9 @@ class DetailViewModel : ViewModel() {
         Repository.addUserComment(result)
     }
 
-    private val cancelUserCollectionLD = MutableLiveData<CollectionData>()
-    val getCancelUserCollectionLD = cancelUserCollectionLD.switchMap { result ->
-        Repository.cancelUserCollection(result)
+    private val cancelUserFavoritesLD = MutableLiveData<FavoritesData>()
+    val getCancelUserFavoritesLD = cancelUserFavoritesLD.switchMap { result ->
+        Repository.cancelUserFavorites(result)
     }
 
     fun getAddUserComment(sourceId: Int, tagId: Int, content: String) {
@@ -35,20 +35,20 @@ class DetailViewModel : ViewModel() {
 
     fun isUserCollect(sourceId: Int, tagId: Int) {
         val user = Repository.getSavedUser()
-        getCollectionInfoLD.value = CollectionData(sourceId, tagId, user.id)
+        getFavoritesInfoLD.value = FavoritesData(sourceId, tagId, user.id)
     }
 
-    fun addUserCollection(sourceId: Int, tagId: Int) {
+    fun addUserFavorites(sourceId: Int, tagId: Int) {
         val user = Repository.getSavedUser()
-        addUserCollectionLD.value = CollectionData(sourceId, tagId, user.id)
+        addUserFavoritesLD.value = FavoritesData(sourceId, tagId, user.id)
     }
 
-    fun cancelUserCollection(sourceId: Int, tagId: Int) {
+    fun cancelUserFavorites(sourceId: Int, tagId: Int) {
         val user = Repository.getSavedUser()
-        cancelUserCollectionLD.value = CollectionData(sourceId, tagId, user.id)
+        cancelUserFavoritesLD.value = FavoritesData(sourceId, tagId, user.id)
     }
 
-    inner class CollectionData(val sourceId: Int, val tagId: Int, val userId:String)
+    inner class FavoritesData(val sourceId: Int, val tagId: Int, val userId:String)
     inner class CommentData(val sourceId: Int, val tagId: Int, val userId: String, val content: String)
 
 }

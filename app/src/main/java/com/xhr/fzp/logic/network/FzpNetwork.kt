@@ -21,7 +21,7 @@ object FzpNetwork {
     private val userService = FzpServiceCreator.create<UserService>()
     private val imageService = FzpServiceCreator.create<ImageService>()
     private val commentService = FzpServiceCreator.create<CommentService>()
-    private val collectionService = FzpServiceCreator.create<CollectionService>()
+    private val favoritesService = FzpServiceCreator.create<FavoritesService>()
 
 
     /**
@@ -46,17 +46,19 @@ object FzpNetwork {
     suspend fun getCommentList(sourceId: Int, tagId: Int) =
         commentService.getCommentList(sourceId, tagId).await()
     suspend fun getVideoInfo(sourceId: Int) = videoService.getVideoInfo(sourceId).await()
-    suspend fun isUserCollect(collectionData: DetailViewModel.CollectionData)
-    = collectionService.isUserCollect(collectionData.sourceId, collectionData.tagId, collectionData.userId).await()
+    suspend fun isUserCollect(favoritesData: DetailViewModel.FavoritesData)
+    = favoritesService.isUserCollect(favoritesData.sourceId, favoritesData.tagId, favoritesData.userId).await()
 
-    suspend fun addUserCollection(collectionData: DetailViewModel.CollectionData)
-    = collectionService.addUserCollection(collectionData.sourceId, collectionData.tagId, collectionData.userId).await()
+    suspend fun addUserFavorites(favoritesData: DetailViewModel.FavoritesData)
+    = favoritesService.addUserFavorites(favoritesData.sourceId, favoritesData.tagId, favoritesData.userId).await()
 
-    suspend fun cancelUserCollection(collectionData: DetailViewModel.CollectionData)
-    = collectionService.cancelUserCollection(collectionData.sourceId, collectionData.tagId, collectionData.userId).await()
+    suspend fun cancelUserFavorites(favoritesData: DetailViewModel.FavoritesData)
+    = favoritesService.cancelUserFavorites(favoritesData.sourceId, favoritesData.tagId, favoritesData.userId).await()
 
     suspend fun addUserComment(commentData: DetailViewModel.CommentData)
             = commentService.addUserComment(commentData.sourceId, commentData.tagId, commentData.userId, commentData.content).await()
+
+    suspend fun getFavoritesList(userId: String) = favoritesService.getFavoritesList(userId).await()
 
     private suspend fun <T> Call<T>.await(): T {
         return suspendCoroutine { continuation ->

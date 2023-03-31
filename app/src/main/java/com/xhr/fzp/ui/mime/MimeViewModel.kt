@@ -28,7 +28,7 @@ class MimeViewModel : ViewModel() {
     }
 
     fun isLocalAvatar(): Boolean {
-        return Repository.isLocalAvatar()
+        return Repository.isLocalUserAvatar()
     }
 
     fun saveUserAvatarToLocal(avatar: Bitmap) {

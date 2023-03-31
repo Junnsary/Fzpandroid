@@ -6,9 +6,12 @@ import com.google.gson.Gson
 import com.xhr.fzp.FzpApplication
 import com.xhr.fzp.logic.model.User
 
-object LoginDao {
+object UserDao {
     private const val USER_INFO = "user_info"
     private const val USER = "user"
+
+    private fun sharedPreferences() = FzpApplication.context
+        .getSharedPreferences(USER_INFO, Context.MODE_PRIVATE)
 
     fun saveUser(user: User) {
         sharedPreferences().edit {
@@ -23,6 +26,11 @@ object LoginDao {
 
     fun isUserLogin() = sharedPreferences().contains(USER)
 
-    private fun sharedPreferences() = FzpApplication.context
-        .getSharedPreferences(USER_INFO, Context.MODE_PRIVATE)
+    fun clearUser(){
+        sharedPreferences().edit {
+            clear()
+            commit()
+        }
+    }
+
 }

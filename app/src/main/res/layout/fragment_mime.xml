@@ -12,11 +12,11 @@
 
         <ImageView
             android:id="@+id/iv_avatar"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginStart="40dp"
             android:layout_centerVertical="true"
-            android:src="@mipmap/avatar"/>
+            android:src="@mipmap/logout_avatar"/>
 
         <LinearLayout
             android:layout_toEndOf="@id/iv_avatar"
@@ -29,7 +29,7 @@
                 android:id="@+id/tv_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:text="未登录"/>
 
         </LinearLayout>
@@ -38,11 +38,13 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/ll_options"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <RelativeLayout
+            android:id="@+id/rl_favorites"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -77,6 +79,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/rl_setting"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

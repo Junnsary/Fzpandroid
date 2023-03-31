@@ -3,7 +3,7 @@ package com.xhr.fzp.logic
 import android.graphics.Bitmap
 import androidx.lifecycle.liveData
 import com.xhr.fzp.logic.dao.ExternalStorageDao
-import com.xhr.fzp.logic.dao.LoginDao
+import com.xhr.fzp.logic.dao.UserDao
 import com.xhr.fzp.logic.model.User
 import com.xhr.fzp.logic.network.FzpNetwork
 import com.xhr.fzp.ui.detail.DetailViewModel
@@ -114,23 +114,27 @@ object Repository {
         Result.success(imageResult)
     }
 
-    fun saveUser(user: User) = LoginDao.saveUser(user)
+    fun saveUser(user: User) = UserDao.saveUser(user)
 
-    fun getSavedUser() = LoginDao.getSavedUser()
+    fun getSavedUser() = UserDao.getSavedUser()
 
-    fun isUserLogin() = LoginDao.isUserLogin()
+    fun isUserLogin() = UserDao.isUserLogin()
+
+    fun clearUser() = UserDao.clearUser()
 
     fun saveUserAvatarToLocal(picture: Bitmap) {
         ExternalStorageDao.savePicture(ExternalStorageDao.USER_AVATAR, picture)
     }
 
-    fun isLocalAvatar(): Boolean {
-        return ExternalStorageDao.isLocalAvatar();
+    fun isLocalUserAvatar(): Boolean {
+        return ExternalStorageDao.isLocalUserAvatar();
     }
 
     fun getUserAvatarFormLocal() : Bitmap {
-        return ExternalStorageDao.getLocalAvatar()
+        return ExternalStorageDao.getLocalUserAvatar()
     }
+
+    fun clearLocalUserAvatar() = ExternalStorageDao.clearLocalUserAvatar()
 
     fun getCommentList(sourceId: Int, tagId: Int) = fire() {
         val commentList = FzpNetwork.getCommentList(sourceId, tagId)
@@ -152,8 +156,8 @@ object Repository {
         }
     }
 
-    fun isUserCollect(collectionData: DetailViewModel.CollectionData) = fire() {
-        val result = FzpNetwork.isUserCollect(collectionData)
+    fun isUserCollect(favoritesData: DetailViewModel.FavoritesData) = fire() {
+        val result = FzpNetwork.isUserCollect(favoritesData)
         if (result.success) {
             val data = result.data
             Result.success(data)
@@ -162,19 +166,29 @@ object Repository {
         }
     }
 
-    fun addUserCollection(collectionData: DetailViewModel.CollectionData) = fire(){
-        val result = FzpNetwork.addUserCollection(collectionData)
+    fun addUserFavorites(favoritesData: DetailViewModel.FavoritesData) = fire(){
+        val result = FzpNetwork.addUserFavorites(favoritesData)
         Result.success(result)
     }
 
-    fun cancelUserCollection(collectionData: DetailViewModel.CollectionData) = fire(){
-        val result = FzpNetwork.cancelUserCollection(collectionData)
+    fun cancelUserFavorites(favoritesData: DetailViewModel.FavoritesData) = fire(){
+        val result = FzpNetwork.cancelUserFavorites(favoritesData)
         Result.success(result)
     }
 
     fun addUserComment(commentData: DetailViewModel.CommentData) = fire(){
         val result = FzpNetwork.addUserComment(commentData)
         Result.success(result)
+    }
+
+    fun getFavoritesList(userId: String) = fire() {
+        val result = FzpNetwork.getFavoritesList(userId)
+        if (result.success) {
+            val data = result.data
+            Result.success(data)
+        } else {
+            Result.failure(RuntimeException("response success is ${result.success}"))
+        }
     }
 
 }

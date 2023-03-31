@@ -1,10 +1,10 @@
 package com.xhr.fzp.mode.state
 
 import android.content.Context
-import com.xhr.fzp.logic.dao.LoginDao
+import com.xhr.fzp.logic.dao.UserDao
 
 object UserContext {
-    private var isLogin : Boolean = LoginDao.isUserLogin()
+    private var isLogin : Boolean = UserDao.isUserLogin()
 
     var mState: State = if (isLogin) LoginState() else LogoutState()
 

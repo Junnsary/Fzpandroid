@@ -3,11 +3,11 @@ package com.xhr.fzp.logic.model
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
-class Collection(
+class Favorites(
     val id : Int,
-    val source: Source,
-    val tag : Tag,
     @SerializedName("created_at") val createdAt : Date,
     val status : String,
+    val source: Source,
+    val tag : Tag,
     val user : User
 )

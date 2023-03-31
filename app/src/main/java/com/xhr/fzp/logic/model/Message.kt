@@ -1,3 +1,3 @@
 package com.xhr.fzp.logic.model
 
-class Message(val message: String)
+data class Message(val message: String)
