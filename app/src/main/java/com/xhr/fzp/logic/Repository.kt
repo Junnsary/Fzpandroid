@@ -172,4 +172,9 @@ object Repository {
         Result.success(result)
     }
 
+    fun addUserComment(commentData: DetailViewModel.CommentData) = fire(){
+        val result = FzpNetwork.addUserComment(commentData)
+        Result.success(result)
+    }
+
 }

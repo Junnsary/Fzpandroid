@@ -37,4 +37,6 @@ class CommentAdapter(private val fragment: Fragment, private val commentList: Li
         useGlideSetImage(fragment, FzpServiceCreator.getUserAvatarUrl(comment.user.avatar), holder.userAvatar)
     }
 
+
+
 }

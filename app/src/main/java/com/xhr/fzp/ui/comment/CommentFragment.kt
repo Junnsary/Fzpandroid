@@ -9,14 +9,25 @@ class CommentFragment(private val sourceId: Int, private val tagId: Int): BaseFr
 
     val viewModel by lazy { ViewModelProvider(this)[CommentViewModel::class.java] }
     private lateinit var adapter: CommentAdapter
+    private var isSendComment = false
 
     override fun initData() {
         viewModel.commentListLd.observe(this) { result ->
             val data = result.getOrNull()
             if (data != null) {
                 viewModel.commentList.clear()
-                viewModel.commentList.addAll(data)
+                if (isSendComment) {
+                    val temp = data.toMutableList()
+                    val last = temp.removeLastOrNull()
+                    if (last != null) {
+                        temp.add(0, last)
+                    }
+                    viewModel.commentList.addAll(temp)
+                } else {
+                    viewModel.commentList.addAll(data)
+                }
                 adapter.notifyDataSetChanged()
+//                binding.rvComment.scrollToPosition(adapter.itemCount - 1)
                 //评论数量
                 binding.tvCommentNum.text = data.size.toString()
             }
@@ -29,5 +40,9 @@ class CommentFragment(private val sourceId: Int, private val tagId: Int): BaseFr
         adapter = CommentAdapter(this, viewModel.commentList)
         binding.rvComment.adapter = adapter
         binding.rvComment.layoutManager = LinearLayoutManager(activity)
+    }
+
+    fun setSendComment(flag: Boolean) {
+        isSendComment = flag
     }
 }

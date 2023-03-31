@@ -55,6 +55,9 @@ object FzpNetwork {
     suspend fun cancelUserCollection(collectionData: DetailViewModel.CollectionData)
     = collectionService.cancelUserCollection(collectionData.sourceId, collectionData.tagId, collectionData.userId).await()
 
+    suspend fun addUserComment(commentData: DetailViewModel.CommentData)
+            = commentService.addUserComment(commentData.sourceId, commentData.tagId, commentData.userId, commentData.content).await()
+
     private suspend fun <T> Call<T>.await(): T {
         return suspendCoroutine { continuation ->
             enqueue(object : Callback<T> {

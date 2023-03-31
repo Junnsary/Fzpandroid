@@ -18,9 +18,19 @@ class DetailViewModel : ViewModel() {
         Repository.addUserCollection(result)
     }
 
+    private val addUserCommentLD = MutableLiveData<CommentData>()
+    val getAddUserCommentLD = Transformations.switchMap(addUserCommentLD) { result ->
+        Repository.addUserComment(result)
+    }
+
     private val cancelUserCollectionLD = MutableLiveData<CollectionData>()
     val getCancelUserCollectionLD = Transformations.switchMap(cancelUserCollectionLD) { result ->
         Repository.cancelUserCollection(result)
+    }
+
+    fun getAddUserComment(sourceId: Int, tagId: Int, content: String) {
+        val user = Repository.getSavedUser()
+        addUserCommentLD.value = CommentData(sourceId, tagId, user.id, content)
     }
 
     fun isUserCollect(sourceId: Int, tagId: Int) {
@@ -39,5 +49,6 @@ class DetailViewModel : ViewModel() {
     }
 
     inner class CollectionData(val sourceId: Int, val tagId: Int, val userId:String)
+    inner class CommentData(val sourceId: Int, val tagId: Int, val userId: String, val content: String)
 
 }

@@ -18,4 +18,5 @@ class CommentViewModel : ViewModel() {
     fun getCommentList(sourceId: Int, tagId: Int) {
         getCommentListLD.value = Pair(sourceId, tagId)
     }
+
 }
