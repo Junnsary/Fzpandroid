@@ -1,30 +1,30 @@
 package com.xhr.fzp.ui.detail
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.switchMap
 import com.xhr.fzp.logic.Repository
 
 class DetailViewModel : ViewModel() {
     fun isUserLogin() = Repository.isUserLogin()
 
     private val getCollectionInfoLD = MutableLiveData<CollectionData>()
-    val isUserCollectLD = Transformations.switchMap(getCollectionInfoLD){ result ->
+    val isUserCollectLD = getCollectionInfoLD.switchMap { result ->
         Repository.isUserCollect(result)
     }
 
     private val addUserCollectionLD = MutableLiveData<CollectionData>()
-    val getAddUserCollectionLD = Transformations.switchMap(addUserCollectionLD) { result ->
+    val getAddUserCollectionLD = addUserCollectionLD.switchMap { result ->
         Repository.addUserCollection(result)
     }
 
     private val addUserCommentLD = MutableLiveData<CommentData>()
-    val getAddUserCommentLD = Transformations.switchMap(addUserCommentLD) { result ->
+    val getAddUserCommentLD = addUserCommentLD.switchMap { result ->
         Repository.addUserComment(result)
     }
 
     private val cancelUserCollectionLD = MutableLiveData<CollectionData>()
-    val getCancelUserCollectionLD = Transformations.switchMap(cancelUserCollectionLD) { result ->
+    val getCancelUserCollectionLD = cancelUserCollectionLD.switchMap { result ->
         Repository.cancelUserCollection(result)
     }
 

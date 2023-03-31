@@ -1,8 +1,8 @@
 package com.xhr.fzp.ui.source
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.switchMap
 import com.xhr.fzp.logic.Repository
 import com.xhr.fzp.logic.model.Source
 import com.xhr.fzp.logic.model.Tag
@@ -11,7 +11,7 @@ class SourceViewModel : ViewModel() {
     val sourceList = ArrayList<Source>()
 
     private val getSourceListLD= MutableLiveData<Pair<String, String>>()
-    val sourceListLD = Transformations.switchMap(getSourceListLD) { result ->
+    val sourceListLD = getSourceListLD.switchMap { result ->
         Repository.getSourceList(result.first, result.second)
     }
 

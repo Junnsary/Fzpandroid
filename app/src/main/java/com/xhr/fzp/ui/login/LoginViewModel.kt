@@ -1,19 +1,19 @@
 package com.xhr.fzp.ui.login
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.switchMap
 import com.xhr.fzp.logic.Repository
 import com.xhr.fzp.logic.model.User
 
 class LoginViewModel : ViewModel() {
 
     private val getUserLoginLD = MutableLiveData<User>()
-    val userLoginLD = Transformations.switchMap(getUserLoginLD){ result ->
+    val userLoginLD = getUserLoginLD.switchMap{ result ->
         Repository.userLogin(result)
     }
     private val getAvatarLD = MutableLiveData<String>()
-    val AvatarLD = Transformations.switchMap(getAvatarLD){ result ->
+    val AvatarLD = getAvatarLD.switchMap{ result ->
         Repository.getAvatar(result)
     }
 
