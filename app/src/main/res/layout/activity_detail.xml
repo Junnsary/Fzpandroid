@@ -51,7 +51,7 @@
                 android:minHeight="100dp" />
 
             <FrameLayout
-                android:id="@+id/fl_article_comment"
+                android:id="@+id/fl_source_comment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
         </LinearLayout>
@@ -78,6 +78,19 @@
             android:visibility="gone" />
 
     </LinearLayout>
+
+<!--    <LinearLayout-->
+<!--        android:id="@+id/ll_login"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="50dp">-->
+
+<!--        <Button-->
+<!--            android:id="@+id/btn_login"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:text="登录"/>-->
+
+<!--    </LinearLayout>-->
 
 </LinearLayout>
 

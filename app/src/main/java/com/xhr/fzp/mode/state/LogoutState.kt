@@ -10,7 +10,7 @@ class LogoutState : State {
         goLoginActivity(context)
     }
 
-    override fun share(context: Context?, block: () -> Unit) {
+    override fun comment(context: Context?, block: () -> Unit) {
         goLoginActivity(context)
     }
 

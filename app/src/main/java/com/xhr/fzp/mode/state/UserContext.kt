@@ -12,8 +12,8 @@ object UserContext {
         mState.collect(context, block)
     }
 
-    fun share(context: Context?, block: () -> Unit) {
-        mState.share(context, block)
+    fun comment(context: Context?, block: () -> Unit) {
+        mState.comment(context, block)
     }
 
     fun login(context: Context?, block: () -> Unit) {

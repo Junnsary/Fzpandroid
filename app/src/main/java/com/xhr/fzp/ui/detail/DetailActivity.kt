@@ -117,7 +117,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
                     commentFragment.setSendComment(true)
                     commentFragment.viewModel.getCommentList(sourceId, tagId)
                     binding.etCommentContent.text.clear()
-                    binding.nsCommentBottom.fullScroll(View.FOCUS_UP)
+                    binding.nsCommentBottom.scrollTo(0, binding.flSourceComment.top)
                 } else {
                     getString(R.string.comment_send_fail).showToast()
                 }
@@ -135,7 +135,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
 
         //添加评论fragment
         commentFragment = CommentFragment(sourceId, tagId)
-        replaceFragment(R.id.fl_article_comment, commentFragment)
+        replaceFragment(R.id.fl_source_comment, commentFragment)
     }
 
     override fun initListener() {
@@ -156,15 +156,14 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
             finish()
         }
 
-//        binding.etCommentContent.setOnFocusChangeListener { v, hasFocus ->
-//            if (hasFocus) {
-//                LogUtil.d(this, "获得焦点！")
-//                binding.btnCommentSend.visibility = View.VISIBLE
-//            } else {
-//                LogUtil.d(this, "失去焦点！")
-//                binding.btnCommentSend.visibility = View.GONE
-//            }
-//        }
+        binding.etCommentContent.setOnFocusChangeListener { v, hasFocus ->
+            if (hasFocus) {
+                LogUtil.d(this, "获得焦点！")
+                UserContext.comment(this){}
+            } else {
+                LogUtil.d(this, "失去焦点！")
+            }
+        }
 
         binding.etCommentContent.addTextChangedListener {
             it?.let {
@@ -186,7 +185,6 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
              */
             viewModel.getAddUserComment(sourceId, tagId, content)
         }
-
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
@@ -235,12 +233,13 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
         return false
     }
 
-
     override fun onStart() {
         super.onStart()
         if (viewModel.isUserLogin()) {
 //            LogUtil.d(this, "已登录")
             viewModel.isUserCollect(sourceId, tagId)
+        } else {
+            binding.etCommentContent.clearFocus()
         }
     }
 }
