@@ -1,20 +1,29 @@
 package com.xhr.fzp.ui.login
 
 import android.content.Intent
-import androidx.appcompat.app.AlertDialog
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.MenuItem
 import androidx.lifecycle.ViewModelProvider
+import com.xhr.fzp.R
 import com.xhr.fzp.base.BaseActivity
 import com.xhr.fzp.databinding.ActivityLoginBinding
 import com.xhr.fzp.logic.model.User
 import com.xhr.fzp.mode.state.UserContext
 import com.xhr.fzp.ui.signup.SignupActivity
-import com.xhr.fzp.utils.createDialog
+import com.xhr.fzp.utils.LoadingDialog
 import com.xhr.fzp.utils.showToast
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
     val viewModel by lazy { ViewModelProvider(this)[LoginViewModel::class.java] }
-    private lateinit var loadingDialog: AlertDialog
+    private lateinit var loginLoadingDialog: LoadingDialog
+    private var isUserIdInput = false
+    private var isUserPasswdInput = false
     override fun initData() {
 //        viewModel.AvatarLD.observe(this){ result ->
 //            val avatar = result.getOrNull()
@@ -33,57 +42,36 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         viewModel.userLoginLD.observe(this) { result ->
             val user = result.getOrNull()
             if (user != null) {
-                if (user.success) {
-//                    LogUtil.d(this, user.toString())
-//                    LogUtil.d(this, user.data.toString())
-                    "登录成功".showToast()
-//                    val imageUrl = "http://10.0.2.2:3000/uploads/images/avatars/image2.jpg"
-//                    Glide.with(this)
-//                        .load(imageUrl)
-//                        .listener(object :  RequestListener<Drawable> {
-//                            override fun onLoadFailed(
-//                                e: GlideException?,
-//                                model: Any?,
-//                                target: Target<Drawable>?,
-//                                isFirstResource: Boolean
-//                            ): Boolean {
-//                                LogUtil.d(this,"加载失败 errorMsg:"+(e?:e?.message));
-//                                return false
-//                            }
-//
-//                            override fun onResourceReady(
-//                                resource: Drawable?,
-//                                model: Any?,
-//                                target: Target<Drawable>?,
-//                                dataSource: DataSource?,
-//                                isFirstResource: Boolean
-//                            ): Boolean {
-//                                LogUtil.d(this, "成功  Drawable Name:")
-//                                return false
-//                            }
-//                        })
-//                        .error(R.mipmap.ic_launcher)
-//                        .into(binding.imageView)
-//                    viewModel.getAvatar(user.data.avatar)
-                    //这里保存信息
-                    viewModel.saveUser(user.data)
-                    UserContext.setLoginState()
-                    finish()
-                } else {
-                    "登录失败".showToast()
+                CoroutineScope(Dispatchers.Main).launch{
+                    delay(1000)
+                    loginLoadingClose()
+                    if (user.success) {
+                        "登录成功".showToast()
+                        //这里保存信息
+                        viewModel.saveUser(user.data)
+                        UserContext.setLoginState()
+                        finish()
+                    } else {
+                        "登录失败，ID或者错误".showToast()
+                    }
                 }
             }
-            closeDialog()
         }
     }
 
     override fun initView() {
+        setSupportActionBar(binding.tlLogin)
 
+        supportActionBar?.let {
+            it.setDisplayHomeAsUpEnabled(true)
+            it.title = ""
+        }
+        notAllowLoginBtn()
     }
 
     override fun initListener() {
         binding.btnLogin.setOnClickListener {
-            showDialog()
+            loginLoadingShow()
             val id = binding.etUserId.text.toString()
             val passwd = binding.etUserPasswd.text.toString()
 //            LogUtil.d(this, binding.etUserId.text.toString())
@@ -94,16 +82,59 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         binding.tvSignup.setOnClickListener {
             startActivity(Intent(this, SignupActivity::class.java))
         }
-        binding.tvReturn.setOnClickListener {
-            finish()
+
+        binding.etUserId.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable) {
+                isUserIdInput = s.toString().isNotEmpty()
+                if (isUserIdInput && isUserPasswdInput) {
+                    allowLoginBtn()
+                } else {
+                    notAllowLoginBtn()
+                }
+            }
+
+        })
+        binding.etUserPasswd.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable) {
+                isUserPasswdInput = s.toString().isNotEmpty()
+                if (isUserIdInput && isUserPasswdInput) {
+                    allowLoginBtn()
+                } else {
+                    notAllowLoginBtn()
+                }
+            }
+        })
+    }
+
+    private fun loginLoadingShow() {
+        loginLoadingDialog = LoadingDialog(this, "登录中...")
+        loginLoadingDialog.show()
+    }
+
+    private fun loginLoadingClose() {
+        loginLoadingDialog.dismiss()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+            }
         }
+        return super.onOptionsItemSelected(item)
     }
 
-    private fun showDialog() {
-        loadingDialog = createDialog("正在登录...")
+    private fun allowLoginBtn() {
+        binding.btnLogin.isEnabled = true
+        binding.btnLogin.setTextColor(getColor(R.color.theme_white_fa))
     }
 
-    private fun closeDialog() {
-        loadingDialog.dismiss()
+    private fun notAllowLoginBtn() {
+        binding.btnLogin.isEnabled = false
+        binding.btnLogin.setTextColor(getColor(R.color.gray_text_color))
     }
 }

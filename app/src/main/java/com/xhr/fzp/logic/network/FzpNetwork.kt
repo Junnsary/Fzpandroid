@@ -45,38 +45,55 @@ object FzpNetwork {
     suspend fun getAvatar(fileName: String) = imageService.getAvatar(fileName).await()
     suspend fun getCommentList(sourceId: Int, tagId: Int) =
         commentService.getCommentList(sourceId, tagId).await()
+
     suspend fun getVideoInfo(sourceId: Int) = videoService.getVideoInfo(sourceId).await()
-    suspend fun isUserCollect(favoritesData: DetailViewModel.FavoritesData)
-    = favoritesService.isUserCollect(favoritesData.sourceId, favoritesData.tagId, favoritesData.userId).await()
+    suspend fun isUserCollect(favoritesData: DetailViewModel.FavoritesData) =
+        favoritesService.isUserCollect(
+            favoritesData.sourceId,
+            favoritesData.tagId,
+            favoritesData.userId
+        ).await()
 
-    suspend fun addUserFavorites(favoritesData: DetailViewModel.FavoritesData)
-    = favoritesService.addUserFavorites(favoritesData.sourceId, favoritesData.tagId, favoritesData.userId).await()
+    suspend fun addUserFavorites(favoritesData: DetailViewModel.FavoritesData) =
+        favoritesService.addUserFavorites(
+            favoritesData.sourceId,
+            favoritesData.tagId,
+            favoritesData.userId
+        ).await()
 
-    suspend fun cancelUserFavorites(favoritesData: DetailViewModel.FavoritesData)
-    = favoritesService.cancelUserFavorites(favoritesData.sourceId, favoritesData.tagId, favoritesData.userId).await()
+    suspend fun cancelUserFavorites(favoritesData: DetailViewModel.FavoritesData) =
+        favoritesService.cancelUserFavorites(
+            favoritesData.sourceId,
+            favoritesData.tagId,
+            favoritesData.userId
+        ).await()
 
-    suspend fun addUserComment(commentData: DetailViewModel.CommentData)
-            = commentService.addUserComment(commentData.sourceId, commentData.tagId, commentData.userId, commentData.content).await()
+    suspend fun addUserComment(commentData: DetailViewModel.CommentData) =
+        commentService.addUserComment(
+            commentData.sourceId,
+            commentData.tagId,
+            commentData.userId,
+            commentData.content
+        ).await()
 
     suspend fun getFavoritesList(userId: String) = favoritesService.getFavoritesList(userId).await()
 
-    private suspend fun <T> Call<T>.await(): T {
-        return suspendCoroutine { continuation ->
-            enqueue(object : Callback<T> {
-                override fun onResponse(call: Call<T>, response: Response<T>) {
-                    val body = response.body()
-                    if (body != null) continuation.resume(body)
-                    else continuation.resumeWithException(RuntimeException("response body is null"))
-                }
+    suspend fun getAllCase() = articleService.getAllCase().await()
 
-                override fun onFailure(call: Call<T>, t: Throwable) {
-                    continuation.resumeWithException(t)
-                }
-            })
-        }
+    private suspend fun <T> Call<T>.await() = suspendCoroutine { continuation ->
+        enqueue(object : Callback<T> {
+            override fun onResponse(call: Call<T>, response: Response<T>) {
+                //把body作为数据 发送出去
+                val body = response.body()
+                if (body != null)
+                    continuation.resume(body)
+                else
+                    continuation.resumeWithException(RuntimeException("response body is null"))
+            }
+
+            override fun onFailure(call: Call<T>, t: Throwable) {
+                continuation.resumeWithException(t)
+            }
+        })
     }
-
-
-
-
 }

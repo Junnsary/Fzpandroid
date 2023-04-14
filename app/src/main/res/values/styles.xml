@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="tablayout_default_style">
+        <item name="tabSelectedTextColor">@color/theme_blue</item>
+        <item name="tabMode">scrollable</item>
+        <item name="android:background">@color/theme_white_fa</item>
+        <item name="tabRippleColor">@android:color/transparent</item>
+        <item name="tabIndicatorColor">@color/theme_blue</item>
+    </style>
+
+    <style name="toolbar_default_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/theme_white_fa</item>
+    </style>
+
+    <style name="text_default_style">
+        <item name="android:textColor">@color/theme_black</item>
+    </style>
+
+    <style name="comment_num_text_style">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/comment_num_text_color</item>
+    </style>
+
+    <style name="bottom_date_style">
+        <item name="android:textSize">12sp</item>
+        <item name="android:color">@color/gray_text_color</item>
+    </style>
+
+    <style name="cover_image_style">
+        <item name="android:scaleType">centerCrop</item>
+    </style>
+
+    <style name="mime_kino_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:paddingBottom">15dp</item>
+        <item name="android:paddingLeft">30dp</item>
+        <item name="android:background">?android:selectableItemBackground</item>
+    </style>
+
+    <style name="mime_kino_image_style">
+        <item name="android:layout_width">25dp</item>
+        <item name="android:layout_height">25dp</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="mime_kino_text_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="edit_text_style">
+        <!--表示控件默认的颜色-->
+<!--        <item name="android:colorControlNormal">@color/dividing_line_color</item>-->
+        <!--表示控件被激活时的颜色-->
+        <item name="android:colorControlActivated">@color/theme_blue</item>
+    </style>
+
+    <style name="edit_login_logout_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:theme">@style/edit_text_style</item>
+    </style>
+
+    <style name="Dialog" parent="android:style/Theme.Dialog">
+        <item name="android:background">#00000000</item>
+
+        <!--背景颜色及和透明程度-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--是否去除标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!--是否去除边框-->
+        <item name="android:windowFrame">@null</item>
+        <!--是否浮现在activity之上-->
+        <item name="android:windowIsFloating">true</item>
+        <!--是否模糊-->
+        <item name="android:backgroundDimEnabled">true</item>
+
+        <!-- 解决 match 失效问题 -->
+<!--        <item name="android:windowFrame">@null</item>-->
+<!--        <item name="android:windowIsTranslucent">true</item>-->
+<!--        <item name="android:windowContentOverlay">@null</item>-->
+<!--        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>-->
+<!--        <item name="android:backgroundDimEnabled">true</item>-->
+    </style>
+
+    <!--对话框的样式-->
+    <style name="NormalDialogStyle">
+        <!--对话框背景 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!--没有标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 是否浮现在Activity之上 -->
+        <item name="android:windowIsFloating">true</item>
+        <!--背景透明 -->
+        <item name="android:windowIsTranslucent">false</item>
+        <!-- 是否有覆盖 -->
+<!--        <item name="android:windowContentOverlay">@null</item>-->
+        <!--背景变暗-->
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+
+</resources>

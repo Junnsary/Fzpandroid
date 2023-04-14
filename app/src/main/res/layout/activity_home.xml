@@ -4,7 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
+    android:background="@color/theme_white_f3"
     android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tb_home"
+        style="@style/toolbar_default_style"/>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vp_home"
@@ -16,6 +21,9 @@
         android:id="@+id/bnv_home"
         android:layout_width="match_parent"
         app:menu="@menu/activity_main_bnv"
+        app:itemTextColor="@drawable/selector_home_bnv"
+        app:itemIconTint="@drawable/selector_home_bnv"
+        android:background="@color/theme_white_fa"
         android:layout_height="wrap_content"/>
 
 </LinearLayout>

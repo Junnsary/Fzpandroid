@@ -3,8 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/theme_white_f3"
     android:orientation="vertical">
 
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tb_favourite"
+        style="@style/toolbar_default_style"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,7 +17,8 @@
         android:orientation="vertical">
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tl_favorites_title"
+            android:id="@+id/tl_favourite_title"
+            style="@style/tablayout_default_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabMode="scrollable" />
@@ -25,9 +31,9 @@
             android:layout_weight="1">
 
             <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/vp_favorites_list"
+                android:id="@+id/vp_favourite_list"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

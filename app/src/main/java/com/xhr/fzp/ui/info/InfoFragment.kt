@@ -1,5 +1,6 @@
 package com.xhr.fzp.ui.info
 
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
@@ -7,7 +8,7 @@ import com.xhr.fzp.base.BaseFragment
 import com.xhr.fzp.databinding.FragmentInfoBinding
 import com.xhr.fzp.logic.model.Tag
 import com.xhr.fzp.ui.source.SourceFragment
-import com.xhr.fzp.utils.LogUtil
+import java.net.ConnectException
 
 /**
  * 创建info fragment类，可以选择创建
@@ -45,37 +46,59 @@ class InfoFragment : BaseFragment<FragmentInfoBinding> {
 
     override fun initData() {
         viewModel.TagListLD.observe(this) { result ->
-            val data = result.getOrNull()
-            if (data != null) {
-                // 合并起来tag的一个fragment
-                LogUtil.d(this, data.toString())
-                viewModel.tagList.clear()
-                viewModel.tagList.addAll(data)
-                if (sum) {
-                    viewModel.fragments.add(SourceFragment(data))
-                    viewModel.tagList.add(0, Tag(0, "推荐", "article", ""))
-                }
-                // 创建每个tag的fragment
-                data.forEach { tag ->
-                    viewModel.fragments.add(SourceFragment(listOf(tag)))
-                }
-//                viewModel.fragments.add(SourceFragment(listOf(data[1])))
-//                viewModel.fragments.add(SourceFragment(listOf(data[2])))
-//                viewModel.fragments.add(SourceFragment(listOf(data[0])))
-//                viewModel.fragments.add(SourceFragment(listOf(data[3])))
 
-                //设置tablayout和viewpager
-                binding.vpInfoList.adapter = object : FragmentStateAdapter(this) {
-                    override fun getItemCount() = viewModel.fragments.size
-                    override fun createFragment(position: Int) = viewModel.fragments[position]
-                }
-                binding.vpInfoList.offscreenPageLimit = 1
+            result.onSuccess {
+                if (it.isNotEmpty()) {
+                    binding.llTlVp.visibility = View.VISIBLE
+                    binding.srlInfo.isEnabled = false
+                    binding.tvFailure.visibility = View.GONE
+                    // 合并起来tag的一个fragment
+//                    LogUtil.d(this, it.toString())
+                    viewModel.tagList.clear()
+                    viewModel.tagList.addAll(it)
+                    if (sum) {
+                        viewModel.fragments.add(SourceFragment(it))
+                        viewModel.tagList.add(0, Tag(0, "推荐", "article", "case"))
+                    }
+                    // 创建每个tag的fragment
+                    it.forEach { tag ->
+                        viewModel.fragments.add(SourceFragment(listOf(tag)))
+                    }
+                    //设置tablayout和viewpager
+                    binding.vpInfoList.adapter = object : FragmentStateAdapter(this) {
+                        override fun getItemCount() = viewModel.fragments.size
+                        override fun createFragment(position: Int) = viewModel.fragments[position]
+                    }
+                    binding.vpInfoList.offscreenPageLimit = 1
 //                binding.vpInfoList.offscreenPageLimit = 4
-                TabLayoutMediator(binding.tlInfoTag, binding.vpInfoList) { tab, position ->
-                    tab.text = viewModel.tagList[position].name
-                }.attach()
+                    TabLayoutMediator(binding.tlInfoTag, binding.vpInfoList) { tab, position ->
+                        tab.text = viewModel.tagList[position].name
+                    }.attach()
+                }
+            }
+
+            result.onFailure {
+                if (it is ConnectException) {
+                    binding.tvFailure.visibility = View.VISIBLE
+                    binding.llTlVp.visibility = View.GONE
+                    binding.srlInfo.isEnabled = true
+                }
+                binding.srlInfo.isRefreshing = false
             }
         }
         viewModel.getTagList(type, category)
     }
+
+    override fun initView() {
+        binding.srlInfo.isEnabled = false
+    }
+
+    override fun initListener() {
+        binding.srlInfo.setOnRefreshListener {
+            viewModel.getTagList(type, category)
+        }
+    }
+
+
+
 }

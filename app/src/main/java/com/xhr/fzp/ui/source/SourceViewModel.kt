@@ -8,15 +8,15 @@ import com.xhr.fzp.logic.model.Source
 import com.xhr.fzp.logic.model.Tag
 
 class SourceViewModel : ViewModel() {
-    val sourceList = ArrayList<Source>()
+    val mSourceList = ArrayList<Source>()
 
-    private val getSourceListLD= MutableLiveData<Pair<String, String>>()
+    private val getSourceListLD = MutableLiveData<Pair<String, String>>()
     val sourceListLD = getSourceListLD.switchMap { result ->
         Repository.getSourceList(result.first, result.second)
     }
 
-    fun getSourceList(tags: List<Tag>){
-        var tb = StringBuilder()
+    fun getSourceList(tags: List<Tag>) {
+        val tb = StringBuilder()
         for (tag in tags) {
             tb.append(tag.id.toString())
             if (tag != tags[tags.size - 1]) {
@@ -25,4 +25,6 @@ class SourceViewModel : ViewModel() {
         }
         getSourceListLD.value = Pair(tags[0].type, tb.toString())
     }
+
+
 }

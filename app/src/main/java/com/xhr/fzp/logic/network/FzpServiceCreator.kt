@@ -9,27 +9,19 @@ object FzpServiceCreator {
     //用户头像的位置
     private const val PUBLIC_IMAGE = "uploads/images/"
     private const val PUBLIC_VIDEO = "uploads/videos/"
-    private const val AVATAR_URL = "${PUBLIC_IMAGE}avatars/"
-    private const val VIDEO_IMAGE_URL = "${PUBLIC_IMAGE}videos/"
-    private const val ARTICLE_IMAGE_URL = "${PUBLIC_IMAGE}articles/"
     private const val GET_ARTICLE = "api/article/"
 
     fun getUserAvatarUrl(fileName: String) : String {
-        return BASE_URL + AVATAR_URL + fileName
+        return BASE_URL + PUBLIC_IMAGE + fileName
     }
 
-    fun getVideoImageURL(fileName: String) : String {
-        return BASE_URL + VIDEO_IMAGE_URL + fileName
+    fun getNetworkImageURL(fileName: String) : String {
+        return BASE_URL + PUBLIC_IMAGE + fileName
     }
 
     fun getArticleURL(id: Int) : String {
         return BASE_URL + GET_ARTICLE + id.toString()
     }
-
-    fun getArticleImageURL(fileName: String) : String {
-        return BASE_URL + ARTICLE_IMAGE_URL + fileName
-    }
-
 
     fun getVideoFilePath(fileName: String): String {
         return BASE_URL + PUBLIC_VIDEO + fileName

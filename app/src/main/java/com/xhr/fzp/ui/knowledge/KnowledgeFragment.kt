@@ -1,7 +1,6 @@
 package com.xhr.fzp.ui.knowledge
 
 import android.content.Intent
-import androidx.lifecycle.ViewModelProvider
 import com.xhr.fzp.R
 import com.xhr.fzp.base.BaseFragment
 import com.xhr.fzp.databinding.FragmentKnowledgeBinding
@@ -11,7 +10,6 @@ import com.xhr.fzp.ui.login.LoginActivity
 import com.xhr.fzp.utils.replaceFragment
 
 class KnowledgeFragment : BaseFragment<FragmentKnowledgeBinding>() {
-    val viewModel by lazy { ViewModelProvider(this)[KnowledgeViewModel::class.java] }
     private lateinit var recommFragment : RecommFragment
 
     override fun initData() {

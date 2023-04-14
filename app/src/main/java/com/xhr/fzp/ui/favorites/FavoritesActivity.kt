@@ -1,5 +1,6 @@
 package com.xhr.fzp.ui.favorites
 
+import android.view.MenuItem
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
@@ -7,6 +8,7 @@ import com.xhr.fzp.base.BaseActivity
 import com.xhr.fzp.databinding.ActivityFavoritesBinding
 import com.xhr.fzp.logic.interfaces.IRefresh
 import com.xhr.fzp.utils.LogUtil
+import com.xhr.fzp.utils.setToolbar
 
 class FavoritesActivity : BaseActivity<ActivityFavoritesBinding>(), IRefresh {
     private val title = arrayListOf("全部", "文章", "视频")
@@ -14,6 +16,8 @@ class FavoritesActivity : BaseActivity<ActivityFavoritesBinding>(), IRefresh {
     private val fragments = HashMap<String, FavoritesFragment>()
 
     val viewModel by lazy { ViewModelProvider(this)[FavoritesViewModel::class.java] }
+
+//    val viewModel by activityViewModels<FavoritesViewModel>()
 
     override fun initData() {
         viewModel.favoritesListLD.observe(this) { result ->
@@ -33,17 +37,27 @@ class FavoritesActivity : BaseActivity<ActivityFavoritesBinding>(), IRefresh {
         fragments[title[1]] = FavoritesFragment()
         fragments[title[2]] = FavoritesFragment()
 
-        binding.vpFavoritesList.adapter = object : FragmentStateAdapter(this) {
+        binding.vpFavouriteList.adapter = object : FragmentStateAdapter(this) {
             override fun getItemCount() = fragments.size
             override fun createFragment(position: Int): FavoritesFragment = fragments[num[position]]!!
         }
-        TabLayoutMediator(binding.tlFavoritesTitle, binding.vpFavoritesList) { tab, position ->
+        TabLayoutMediator(binding.tlFavouriteTitle, binding.vpFavouriteList) { tab, position ->
             tab.text = title[position]
         }.attach()
+
+        setToolbar(binding.tbFavourite, "收藏")
 
         refresh()
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
     override fun initListener() {
         binding.srlRefreshData.setOnRefreshListener {
             refresh()

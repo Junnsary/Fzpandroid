@@ -7,7 +7,7 @@ import retrofit2.http.Path
 
 interface ImageService {
 
-    @GET("uploads/images/avatars/{avatar_name}")
+    @GET("uploads/images/{avatar_name}")
     fun getAvatar(@Path("avatar_name") fileName: String ) : Call<ResponseBody>
 
 }

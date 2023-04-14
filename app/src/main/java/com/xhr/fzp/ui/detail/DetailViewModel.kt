@@ -9,7 +9,7 @@ class DetailViewModel : ViewModel() {
     fun isUserLogin() = Repository.isUserLogin()
 
     private val getFavoritesInfoLD = MutableLiveData<FavoritesData>()
-    val isUserCollectLD = getFavoritesInfoLD.switchMap { result ->
+    val isUserFavouriteLD = getFavoritesInfoLD.switchMap { result ->
         Repository.isUserCollect(result)
     }
 

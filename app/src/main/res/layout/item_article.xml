@@ -1,46 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="10dp"
+    app:cardCornerRadius="12dp">
 
-    <RelativeLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
-
-        <TextView
-            android:id="@+id/tv_article_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="图解|谨防网络诈骗发" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:orientation="horizontal">
+            android:layout_width="70dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="15dp">
 
-            <TextView
-                android:id="@+id/tv_article_manager_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="官方" />
+            <androidx.cardview.widget.CardView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="0dp">
 
-            <TextView
-                android:id="@+id/tv_article_datetime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:text="2022-11-18" />
+                <ImageView
+                    android:id="@+id/iv_article_cover"
+                    style="@style/cover_image_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@mipmap/image_test2" />
+
+            </androidx.cardview.widget.CardView>
+
+
         </LinearLayout>
 
-    </RelativeLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/iv_article_cover"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@mipmap/image_test2" />
+            <TextView
+                android:id="@+id/tv_article_title"
+                style="@style/text_default_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="图解|谨防网络诈骗发" />
 
-</LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_article_manager_name"
+                    style="@style/bottom_date_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="官方" />
+
+                <TextView
+                    android:id="@+id/tv_article_datetime"
+                    style="@style/bottom_date_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:text="2022-11-18" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</com.google.android.material.card.MaterialCardView>

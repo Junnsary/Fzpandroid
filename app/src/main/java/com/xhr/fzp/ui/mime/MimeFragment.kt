@@ -41,13 +41,12 @@ class MimeFragment :  BaseFragment<FragmentMimeBinding>(){
 //            LogUtil.d(this, "没有用户！")
             setUserLogout()
         }
-
-        binding.ivAvatar.setOnClickListener {
-            UserContext.login(activity) {}
-        }
     }
 
     override fun initListener() {
+        binding.llLogin.setOnClickListener {
+            UserContext.login(activity) {}
+        }
         binding.rlSetting.setOnClickListener {
             activity?.let{
                 it.quickStartActivity<SettingActivity>()
@@ -75,12 +74,13 @@ class MimeFragment :  BaseFragment<FragmentMimeBinding>(){
          *  没有：获取网络图片，设置，然后保存在本地图片
          */
         if (viewModel.isLocalAvatar()) {
+            LogUtil.d(this, "查看本地图片")
             val localAvatar = viewModel.getLocalAvatar()
             binding.ivAvatar.setImageBitmap(localAvatar)
         } else {
+            LogUtil.d(this, "获取网络图片")
             viewModel.getNetAvatar(user.avatar)
         }
-
         binding.llOptions.visibility = View.VISIBLE
     }
 
@@ -95,7 +95,7 @@ class MimeFragment :  BaseFragment<FragmentMimeBinding>(){
     }
 
     private fun setUserLogout() {
-        binding.ivAvatar.setImageResource(R.mipmap.logout_avatar)
+        binding.ivAvatar.setImageResource(R.mipmap.avatar_test)
         binding.tvUserName.text = getString(R.string.user_logout)
         binding.llOptions.visibility = View.GONE
     }

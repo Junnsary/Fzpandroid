@@ -1,117 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/theme_white_fa"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/ll_login"
         android:layout_width="match_parent"
-        android:layout_height="150dp">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_avatar"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="40dp"
-            android:layout_centerVertical="true"
-            android:src="@mipmap/logout_avatar"/>
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@mipmap/avatar_test" />
 
-        <LinearLayout
-            android:layout_toEndOf="@id/iv_avatar"
-            android:layout_marginTop="50dp"
-            android:layout_marginStart="30dp"
+        <TextView
+            android:id="@+id/tv_user_name"
+            style="@style/text_default_style"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp"
+            android:letterSpacing="0.07"
+            android:paddingBottom="10dp"
+            android:text="萧宏润"
+            android:textSize="16dp" />
 
-            <TextView
-                android:id="@+id/tv_user_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:text="未登录"/>
+    </LinearLayout>
 
-        </LinearLayout>
-
-
-    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="25dp"
+        android:background="@color/dividing_line_color" />
 
     <LinearLayout
         android:id="@+id/ll_options"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <RelativeLayout
+        <!--        <RelativeLayout-->
+        <!--            android:id="@+id/rl_favorites"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:orientation="horizontal">-->
+
+        <!--            <LinearLayout-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:orientation="horizontal">-->
+
+        <!--                <ImageView-->
+        <!--                    android:layout_width="30dp"-->
+        <!--                    android:layout_height="30dp"-->
+        <!--                    android:src="@mipmap/pic" />-->
+
+        <!--                <TextView-->
+        <!--                    android:layout_width="wrap_content"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:layout_gravity="center"-->
+        <!--                    android:text="收藏" />-->
+
+        <!--            </LinearLayout>-->
+
+        <!--            <TextView-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_alignParentRight="true"-->
+        <!--                android:layout_centerVertical="true"-->
+        <!--                android:text=">"-->
+        <!--                android:textSize="20sp" />-->
+
+
+        <!--        </RelativeLayout>-->
+
+        <!--        <RelativeLayout-->
+        <!--            android:id="@+id/rl_setting"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:orientation="horizontal">-->
+
+        <!--            <LinearLayout-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:orientation="horizontal">-->
+
+        <!--                <ImageView-->
+        <!--                    android:layout_width="30dp"-->
+        <!--                    android:layout_height="30dp"-->
+        <!--                    android:src="@mipmap/pic" />-->
+
+        <!--                <TextView-->
+        <!--                    android:layout_width="wrap_content"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:layout_gravity="center"-->
+        <!--                    android:text="设置" />-->
+
+        <!--            </LinearLayout>-->
+
+        <!--            <TextView-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_alignParentRight="true"-->
+        <!--                android:layout_centerVertical="true"-->
+        <!--                android:text=">"-->
+        <!--                android:textSize="20sp" />-->
+
+
+        <!--        </RelativeLayout>-->
+
+        <LinearLayout
             android:id="@+id/rl_favorites"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            style="@style/mime_kino_style">
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@mipmap/pic"/>
-
-                <TextView
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="收藏"/>
-
-            </LinearLayout>
+            <ImageView
+                style="@style/mime_kino_image_style"
+                android:src="@mipmap/favourite_kino" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:textSize="20sp"
-                android:text=">"/>
+                style="@style/mime_kino_text_style"
+                android:text="收藏"/>
 
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:src="@mipmap/right_in" />
+        </LinearLayout>
 
-        </RelativeLayout>
-
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/rl_setting"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            style="@style/mime_kino_style">
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@mipmap/pic"/>
-
-                <TextView
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="设置"/>
-
-            </LinearLayout>
+            <ImageView
+                style="@style/mime_kino_image_style"
+                android:src="@mipmap/setting_kino" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:textSize="20sp"
-                android:text=">"/>
+                style="@style/mime_kino_text_style"
+                android:text="设置" />
 
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:src="@mipmap/right_in" />
+        </LinearLayout>
 
-        </RelativeLayout>
 
     </LinearLayout>
 

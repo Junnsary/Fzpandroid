@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.xhr.fzp.R
 import com.xhr.fzp.logic.model.Comment
 import com.xhr.fzp.logic.network.FzpServiceCreator
+import com.xhr.fzp.utils.LogUtil
+import com.xhr.fzp.utils.formatDateTime
 import com.xhr.fzp.utils.useGlideSetImage
 
 class CommentAdapter(private val fragment: Fragment, private val commentList: List<Comment>) : RecyclerView.Adapter<CommentAdapter.CommentViewHolder>() {
@@ -32,8 +34,9 @@ class CommentAdapter(private val fragment: Fragment, private val commentList: Li
     override fun onBindViewHolder(holder: CommentViewHolder, position: Int) {
         val comment = commentList[position]
         holder.commentContent.text = comment.content
-        holder.commentDate.text = comment.createdAt.toString()
+        holder.commentDate.text = formatDateTime(comment.createdAt)
         holder.userName.text = comment.user.name
+        LogUtil.d(this, comment.user.avatar)
         useGlideSetImage(fragment, FzpServiceCreator.getUserAvatarUrl(comment.user.avatar), holder.userAvatar)
     }
 

@@ -2,11 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menu_item_study"
+        android:icon="@mipmap/knowledge"
         android:title="@string/activity_mian_study_str" />
     <item
         android:id="@+id/menu_item_case"
+        android:icon="@mipmap/case1"
         android:title="@string/activity_main_case_str" />
     <item
         android:id="@+id/menu_item_mime"
+        android:icon="@mipmap/mime"
         android:title="@string/activity_main_mine_str" />
 </menu>

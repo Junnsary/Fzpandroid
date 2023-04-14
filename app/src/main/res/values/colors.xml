@@ -7,4 +7,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="theme_white_fa">#FAFAFA</color>
+    <color name="theme_white_f3">#F3F3F3</color>
+    <color name="theme_black">#000000</color>
+    <color name="theme_blue">#2571E6</color>
+    <color name="half_black_transparent">#66000000</color>
+    <color name="comment_num_text_color">#9A9A9A</color>
+    <color name="dividing_line_color">#E3E3E3</color>
+    <color name="gray_text_color">#999999</color>
 </resources>

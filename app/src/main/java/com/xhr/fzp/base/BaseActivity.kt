@@ -13,6 +13,8 @@ abstract class BaseActivity<VB: ViewBinding> : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ViewBindingUtil.inflateWithGeneric(this, layoutInflater)
         setContentView(binding.root)
+//        window.statusBarColor = getColor(R.color.my_black)
+
         LogUtil.d(this, "onCreate")
         initData()
         initView()

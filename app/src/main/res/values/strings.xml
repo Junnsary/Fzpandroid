@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Fzp</string>
+    <string name="app_name">防诈骗知识平台</string>
     <string name="activity_mian_study_str">学习</string>
     <string name="activity_main_case_str">案例</string>
     <string name="activity_main_mine_str">我的</string>
@@ -16,4 +16,7 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="user_logout">未登录</string>
+    <string name="article_knowledge_str">文章学习</string>
+    <string name="video_knowledge_str">视频学习</string>
+    <string name="comment_edit_hit_text">发表您的评论</string>
 </resources>

@@ -1,12 +1,10 @@
 package com.xhr.fzp
 
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
-
+import androidx.test.platform.app.InstrumentationRegistry
+import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
-
-import org.junit.Assert.*
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -20,5 +18,15 @@ class ExampleInstrumentedTest {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
         assertEquals("com.fzp.android", appContext.packageName)
+    }
+
+    @Test
+    fun databaseTest() {
+//        val db = AppDatabase.getDatabase(FzpApplication.context)
+//        val save = Save(0, 0, "article", "title", byteArrayOf(1, 2, 3), "hh", 1, "position", "category")
+//        db.saveDao().insertSave(save)
+//        db.saveDao().queryAll().forEach {
+//            println(it)
+//        }
     }
 }

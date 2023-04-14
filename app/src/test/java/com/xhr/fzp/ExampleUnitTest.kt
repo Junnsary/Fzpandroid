@@ -1,6 +1,5 @@
 package com.xhr.fzp
 
-import com.xhr.fzp.logic.network.FzpServiceCreator
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -17,7 +16,12 @@ class ExampleUnitTest {
 
     @Test
     fun check() {
-        println(FzpServiceCreator.getVideoImageURL("default.jpg"))
+
+
+    }
+
+    @Test
+    fun databaseTest() {
 
     }
 

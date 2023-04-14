@@ -1,27 +1,43 @@
 package com.xhr.fzp.logic
 
 import android.graphics.Bitmap
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
+import com.xhr.fzp.FzpApplication
 import com.xhr.fzp.logic.dao.ExternalStorageDao
 import com.xhr.fzp.logic.dao.UserDao
 import com.xhr.fzp.logic.model.User
 import com.xhr.fzp.logic.network.FzpNetwork
+import com.xhr.fzp.logic.room.database.AppDatabase
+import com.xhr.fzp.logic.room.entity.Save
 import com.xhr.fzp.ui.detail.DetailViewModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
 object Repository {
+
+    private val dbHelper = AppDatabase.getDatabase(FzpApplication.context)
+
     /**
      * 方便创建livedata
      */
-    private fun <T> fire(context: CoroutineContext = Dispatchers.IO, block: suspend () -> Result<T>) =
-        liveData<Result<T>>(context) {
+    private fun <T> fire(
+        context: CoroutineContext = Dispatchers.IO,
+        block: suspend () -> Result<T>
+    ) =
+        liveData(context) {
             val result = try {
                 block()
+//            } catch (ce: ConnectException) {
+////                LogUtil.d(this, "网络发生错误")
+//                Result.failure(ce)
             } catch (e: Exception) {
                 Result.failure(e)
             }
             emit(result)
+//            emit(block())
         }
 
     /**
@@ -63,7 +79,7 @@ object Repository {
         }
     }
 
-    fun getRecommList(num : Int) = fire() {
+    fun getRecommList(num: Int) = fire() {
         val recommList = FzpNetwork.getRecommList(num)
         if (recommList.success) {
             val data = recommList.data
@@ -105,12 +121,6 @@ object Repository {
 
     fun getAvatar(fileName: String) = fire() {
         val imageResult = FzpNetwork.getAvatar(fileName)
-//        if (imageResult.success) {
-//            val data = imageResult.data
-//            Result.success(data)
-//        } else {
-//            Result.failure(RuntimeException("response success is ${imageResult.success}"))
-//        }
         Result.success(imageResult)
     }
 
@@ -130,7 +140,7 @@ object Repository {
         return ExternalStorageDao.isLocalUserAvatar();
     }
 
-    fun getUserAvatarFormLocal() : Bitmap {
+    fun getUserAvatarFormLocal(): Bitmap {
         return ExternalStorageDao.getLocalUserAvatar()
     }
 
@@ -146,7 +156,7 @@ object Repository {
         }
     }
 
-    fun getVideoInfo(sourceId: Int)= fire() {
+    fun getVideoInfo(sourceId: Int) = fire() {
         val result = FzpNetwork.getVideoInfo(sourceId)
         if (result.success) {
             val data = result.data
@@ -166,17 +176,17 @@ object Repository {
         }
     }
 
-    fun addUserFavorites(favoritesData: DetailViewModel.FavoritesData) = fire(){
+    fun addUserFavorites(favoritesData: DetailViewModel.FavoritesData) = fire() {
         val result = FzpNetwork.addUserFavorites(favoritesData)
         Result.success(result)
     }
 
-    fun cancelUserFavorites(favoritesData: DetailViewModel.FavoritesData) = fire(){
+    fun cancelUserFavorites(favoritesData: DetailViewModel.FavoritesData) = fire() {
         val result = FzpNetwork.cancelUserFavorites(favoritesData)
         Result.success(result)
     }
 
-    fun addUserComment(commentData: DetailViewModel.CommentData) = fire(){
+    fun addUserComment(commentData: DetailViewModel.CommentData) = fire() {
         val result = FzpNetwork.addUserComment(commentData)
         Result.success(result)
     }
@@ -191,4 +201,37 @@ object Repository {
         }
     }
 
+    fun saveSourceToDatabase(saves: List<Save>) {
+        //开启协程
+        CoroutineScope(Dispatchers.IO).launch {
+            if (saves.isNotEmpty()) {
+                dbHelper.saveDao().deleteSaveByPC(saves[0].category, saves[0].name)
+                dbHelper.saveDao().insertSaveList(saves)
+            }
+        }
+    }
+
+    fun getSourceFromDatabase(
+        category: String,
+        name: String,
+        type: Array<String>
+    ): LiveData<List<Save>> {
+        return dbHelper.saveDao().querySaveByPC(category, name, type)
+    }
+
+    fun deleteSourceFromDatabase(category: String, name: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            dbHelper.saveDao().deleteSaveByPC(category, name)
+        }
+    }
+
+    fun getAllCase() = fire {
+        val result = FzpNetwork.getAllCase()
+        if (result.success) {
+            val data = result.data
+            Result.success(data)
+        } else {
+            Result.failure(RuntimeException("response success is ${result.success}"))
+        }
+    }
 }

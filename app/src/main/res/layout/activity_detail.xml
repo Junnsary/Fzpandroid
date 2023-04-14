@@ -3,35 +3,52 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:id="@+id/rl_actionbar"
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
+    <!--    <RelativeLayout-->
+    <!--        android:id="@+id/rl_actionbar"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="50dp">-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/tv_return"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_alignParentStart="true"-->
+    <!--            android:layout_centerVertical="true"-->
+    <!--            android:text="返回" />-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/tv_type_title"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_centerInParent="true" />-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/tv_collect"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_alignParentEnd="true"-->
+    <!--            android:layout_centerVertical="true"-->
+    <!--            android:text="收藏" />-->
+    <!--    </RelativeLayout>-->
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tl_detail"
+        style="@style/toolbar_default_style"
+        android:elevation="3dp" >
 
         <TextView
-            android:id="@+id/tv_return"
+            android:id="@+id/tv_detail_titile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:text="返回" />
+            android:layout_gravity="center"
+            style="@style/text_default_style"
+            android:textSize="16sp"
+            android:text="文章学习"/>
 
-        <TextView
-            android:id="@+id/tv_type_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true" />
-
-        <TextView
-            android:id="@+id/tv_collect"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:text="收藏" />
-    </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/ns_comment_bottom"
@@ -53,44 +70,66 @@
             <FrameLayout
                 android:id="@+id/fl_source_comment"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/dividing_line_color" />
+
     <LinearLayout
         android:id="@+id/ll_focus"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="50dp"
+        android:elevation="10dp"
+        android:orientation="horizontal">
+
 
         <EditText
             android:id="@+id/et_comment_content"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_weight="1"
-            android:hint="说点什么.." />
+            android:background="@drawable/send_comment_edit_shape"
+            android:hint="@string/comment_edit_hit_text"
+            android:paddingLeft="10dp"
+            android:textSize="14sp" />
 
         <Button
             android:id="@+id/btn_comment_send"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="70dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:background="@drawable/comment_send_btn_shape"
             android:text="发送"
+            android:textColor="@color/theme_white_fa"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
             android:visibility="gone" />
 
     </LinearLayout>
 
-<!--    <LinearLayout-->
-<!--        android:id="@+id/ll_login"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="50dp">-->
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/ll_login"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="50dp">-->
 
-<!--        <Button-->
-<!--            android:id="@+id/btn_login"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:text="登录"/>-->
+    <!--        <Button-->
+    <!--            android:id="@+id/btn_login"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:text="登录"/>-->
 
-<!--    </LinearLayout>-->
+    <!--    </LinearLayout>-->
 
 </LinearLayout>
 

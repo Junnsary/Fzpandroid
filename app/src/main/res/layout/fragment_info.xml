@@ -1,21 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/srl_info"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tl_info_tag"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:tabMode="scrollable"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/vp_info_list"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/tv_failure"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="网络发生错误，请下拉重试"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:visibility="gone"/>
 
-</LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_tl_vp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tl_info_tag"
+                style="@style/tablayout_default_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/vp_info_list"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

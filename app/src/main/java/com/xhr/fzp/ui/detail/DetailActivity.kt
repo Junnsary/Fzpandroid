@@ -3,6 +3,8 @@ package com.xhr.fzp.ui.detail
 import android.content.Context
 import android.content.Intent
 import android.os.IBinder
+import android.view.Menu
+import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -13,9 +15,9 @@ import com.xhr.fzp.R
 import com.xhr.fzp.base.BaseActivity
 import com.xhr.fzp.databinding.ActivityDetailBinding
 import com.xhr.fzp.mode.state.UserContext
-import com.xhr.fzp.ui.article.ArticleFragment
+import com.xhr.fzp.ui.articledetail.ArticleFragment
 import com.xhr.fzp.ui.comment.CommentFragment
-import com.xhr.fzp.ui.video.VideoFragment
+import com.xhr.fzp.ui.videodetail.VideoFragment
 import com.xhr.fzp.utils.LogUtil
 import com.xhr.fzp.utils.replaceFragment
 import com.xhr.fzp.utils.showToast
@@ -60,21 +62,23 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
         when (type) {
             ARTICLE -> {
                 fragment = ArticleFragment(sourceId)
-//                binding.tvTypeTitle.text = "文章学习"
+                binding.tvDetailTitile.text = "文章学习"
             }
             VIDEO -> {
                 fragment = VideoFragment(sourceId)
 //                binding.rlActionbar.visibility = View.GONE
-//                binding.tvTypeTitle.text = "视频学习"
+                binding.tvDetailTitile.text = "视频学习"
             }
         }
 
-        viewModel.isUserCollectLD.observe(this) { result ->
+        //判断是否收藏了
+        viewModel.isUserFavouriteLD.observe(this) { result ->
             val data = result.getOrNull()
             data?.let {
                 if (it) {
                     LogUtil.d(this, "已经收藏")
-                    binding.tvCollect.setTextColor(getColor(android.R.color.holo_red_dark))
+//                    binding.tvCollect.setTextColor(getColor(android.R.color.holo_red_dark))
+                    gotFavourite()
                     isCollect = true
                 }
             }
@@ -85,7 +89,8 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
             if (data != null) {
                 if (data.success) {
                     "添加收藏成功".showToast()
-                    binding.tvCollect.setTextColor(getColor(android.R.color.holo_red_dark))
+//                    binding.tvCollect.setTextColor(getColor(android.R.color.holo_red_dark))
+                    gotFavourite()
                     isCollect = true
                 } else {
                     "添加收藏失败".showToast()
@@ -99,7 +104,8 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
             if (data != null) {
                 if (data.success) {
                     "取消收藏成功".showToast()
-                    binding.tvCollect.setTextColor(getColor(R.color.black))
+//                    binding.tvCollect.setTextColor(getColor(R.color.black))
+                    noFavourite()
                     isCollect = false
                 } else {
                     "取消收藏失败".showToast()
@@ -136,30 +142,38 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
         //添加评论fragment
         commentFragment = CommentFragment(sourceId, tagId)
         replaceFragment(R.id.fl_source_comment, commentFragment)
+
+        //设置 返回图标
+        setSupportActionBar(binding.tlDetail)
+        supportActionBar?.let {
+            it.setDisplayHomeAsUpEnabled(true)
+            it.title = ""
+        }
+
     }
 
     override fun initListener() {
-        binding.tvCollect.setOnClickListener {
-            UserContext.collect(this) {
-                if (collectClick) {
-                    if (isCollect) {
-                        viewModel.cancelUserFavorites(sourceId, tagId)
-                    } else {
-                        viewModel.addUserFavorites(sourceId, tagId)
-                    }
-                    collectClick = false
-                }
-            }
-        }
-
-        binding.tvReturn.setOnClickListener {
-            finish()
-        }
+//        binding.tvCollect.setOnClickListener {
+//            UserContext.collect(this) {
+//                if (collectClick) {
+//                    if (isCollect) {
+//                        viewModel.cancelUserFavorites(sourceId, tagId)
+//                    } else {
+//                        viewModel.addUserFavorites(sourceId, tagId)
+//                    }
+//                    collectClick = false
+//                }
+//            }
+//        }
+//
+//        binding.tvReturn.setOnClickListener {
+//            finish()
+//        }
 
         binding.etCommentContent.setOnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
                 LogUtil.d(this, "获得焦点！")
-                UserContext.comment(this){}
+                UserContext.comment(this) {}
             } else {
                 LogUtil.d(this, "失去焦点！")
             }
@@ -176,7 +190,6 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
             }
         }
 
-
         binding.btnCommentSend.setOnClickListener {
             val content = binding.etCommentContent.text.toString().trim()
             /**
@@ -185,6 +198,48 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
              */
             viewModel.getAddUserComment(sourceId, tagId, content)
         }
+
+        //设置 收藏 和 取消收藏
+        binding.tlDetail.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.action_favorites -> {
+                    UserContext.collect(this) {
+                        if (collectClick) {
+                            if (isCollect) {
+                                viewModel.cancelUserFavorites(sourceId, tagId)
+                            } else {
+                                viewModel.addUserFavorites(sourceId, tagId)
+                            }
+                            collectClick = false
+                        }
+                    }
+//                    it.setIcon(R.drawable.ic_favourite_red_38)
+                }
+            }
+            true
+        }
+
+    }
+
+    private fun gotFavourite() {
+        binding.tlDetail.menu.getItem(0).setIcon(R.drawable.ic_favourite_red_38)
+    }
+
+    private fun noFavourite() {
+        binding.tlDetail.menu.getItem(0).setIcon(R.drawable.ic_favourite_withe_38)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home ->
+                finish()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreatePanelMenu(featureId: Int, menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_toolbar_detail, menu)
+        return true
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
