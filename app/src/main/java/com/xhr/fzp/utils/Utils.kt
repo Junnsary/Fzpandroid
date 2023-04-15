@@ -26,6 +26,9 @@ import com.xhr.fzp.logic.model.Source
 import com.xhr.fzp.logic.model.Tag
 import com.xhr.fzp.logic.network.FzpServiceCreator
 import com.xhr.fzp.logic.room.entity.Save
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -145,8 +148,21 @@ fun setCoverImageOfSource(imageName: String, imageView: ImageView, context: Cont
      */
     if (ExternalStorageDao.isCachedImages(imageName)) {
         //存在就获取本地缓存的
-        LogUtil.d("setCoverImageOfSource", "缓存存在图片")
-        imageView.setImageBitmap(ExternalStorageDao.readCachedImages(imageName))
+        CoroutineScope(Dispatchers.Main).launch {
+            LogUtil.d("setCoverImageOfSource", "缓存存在图片")
+            /**
+             * Bitmap image = BitmapFactory.decodeFile(file.getPath());
+            float w = image.getWidth();//get width
+            float h = image.getHeight();//get height
+            int W = [handle width management here...];
+            int H = (int) ( (h*W)/w);
+            Bitmap b = Bitmap.createScaledBitmap(image, W, H, false);//scale the bitmap
+            imageView.setImageBitmap(b);//set the image view
+            image = null;//save memory on the bitmap called 'image'
+             */
+            val image = ExternalStorageDao.readCachedImages(imageName)
+            imageView.setImageBitmap(image)
+        }
     } else {
         //不存在就获取网络图片并且保存在本地
         Glide.with(context)
@@ -154,9 +170,15 @@ fun setCoverImageOfSource(imageName: String, imageView: ImageView, context: Cont
             .load(FzpServiceCreator.getNetworkImageURL(imageName))
             .into(object : CustomTarget<Bitmap>() {
                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                    imageView.setImageBitmap(resource)
+                    // 保存前进行裁剪， 取出的时候就不用操作了
+                    val w = resource.width
+                    val h = resource.height
+                    val W = 600
+                    val H = (h * W) / w
+                    val b = Bitmap.createScaledBitmap(resource, W, H, false)
+                    imageView.setImageBitmap(b)
                     //保存在本地 bitmap在本地
-                    ExternalStorageDao.cachedImagesByBitmap(imageName,resource)
+                    ExternalStorageDao.cachedImagesByBitmap(imageName,b)
                 }
 
                 override fun onLoadCleared(placeholder: Drawable?) {}

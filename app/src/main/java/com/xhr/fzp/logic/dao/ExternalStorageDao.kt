@@ -97,6 +97,11 @@ object ExternalStorageDao {
          */
         val fis = FileInputStream(File(externalCacheImageDir, imageName))
         val bis = BufferedInputStream(fis)
+//        CoroutineScope(Dispatchers.IO).launch {
+//
+//        }
+//        val file = File(externalCacheImageDir, imageName)
+//        return BitmapFactory.decodeFile(file.absolutePath)
         return BitmapFactory.decodeStream(bis)
     }
 
