@@ -45,9 +45,6 @@
             android:name=".ui.knowledge.articlevideo.ArticleVideoActivity"
             android:exported="false" />
         <activity
-            android:name=".other.TestActivity"
-            android:exported="true" />
-        <activity
             android:name=".ui.home.HomeActivity"
             android:exported="true">
         </activity>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">防诈骗知识平台</string>
+    <string name="app_name">大学生防诈骗知识平台</string>
     <string name="activity_mian_study_str">学习</string>
     <string name="activity_main_case_str">案例</string>
     <string name="activity_main_mine_str">我的</string>

@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.xhr.fzp.R
 import com.xhr.fzp.base.BaseActivity
 import com.xhr.fzp.databinding.ActivityDetailBinding
-import com.xhr.fzp.mode.state.UserContext
+import com.xhr.fzp.utils.state.UserContext
 import com.xhr.fzp.ui.articledetail.ArticleFragment
 import com.xhr.fzp.ui.comment.CommentFragment
 import com.xhr.fzp.ui.videodetail.VideoFragment

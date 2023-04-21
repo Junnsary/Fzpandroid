@@ -8,7 +8,6 @@ import com.xhr.fzp.base.BaseFragment
 import com.xhr.fzp.databinding.FragmentInfoBinding
 import com.xhr.fzp.logic.model.Tag
 import com.xhr.fzp.ui.source.SourceFragment
-import java.net.ConnectException
 
 /**
  * 创建info fragment类，可以选择创建
@@ -78,11 +77,11 @@ class InfoFragment : BaseFragment<FragmentInfoBinding> {
             }
 
             result.onFailure {
-                if (it is ConnectException) {
-                    binding.tvFailure.visibility = View.VISIBLE
-                    binding.llTlVp.visibility = View.GONE
-                    binding.srlInfo.isEnabled = true
-                }
+//                LogUtil.d(this, "case获取失败！")
+//                LogUtil.d(this, it.javaClass.simpleName)
+                binding.tvFailure.visibility = View.VISIBLE
+                binding.llTlVp.visibility = View.GONE
+                binding.srlInfo.isEnabled = true
                 binding.srlInfo.isRefreshing = false
             }
         }

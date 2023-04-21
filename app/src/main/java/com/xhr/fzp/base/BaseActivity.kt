@@ -1,5 +1,6 @@
 package com.xhr.fzp.base
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
@@ -14,7 +15,8 @@ abstract class BaseActivity<VB: ViewBinding> : AppCompatActivity() {
         binding = ViewBindingUtil.inflateWithGeneric(this, layoutInflater)
         setContentView(binding.root)
 //        window.statusBarColor = getColor(R.color.my_black)
-
+        //设置强制竖屏
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         LogUtil.d(this, "onCreate")
         initData()
         initView()

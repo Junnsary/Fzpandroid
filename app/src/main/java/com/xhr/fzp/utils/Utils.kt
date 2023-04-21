@@ -29,6 +29,7 @@ import com.xhr.fzp.logic.room.entity.Save
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -221,4 +222,54 @@ fun <T> LiveData<Result<T>>.observeResult(lifecycleOwner: LifecycleOwner, onSucc
             onFailure(it)
         }
     }
+}
+
+/**
+ * 显示目录的大小
+ */
+
+fun getFolderSize(folder: File): Long {
+    var size: Long = 0
+    if (folder.isDirectory) {
+        for (file in folder.listFiles()) {
+            size += if (file.isFile) {
+                file.length()
+            } else {
+                getFolderSize(file)
+            }
+        }
+    } else {
+        size = folder.length()
+    }
+    return size
+}
+
+fun formatFileSize(size: Long): String {
+    val units = arrayOf("B", "KB", "MB", "GB", "TB")
+    var unitIndex = 0
+    var adjustedSize = size.toDouble()
+    while (adjustedSize > 1024 && unitIndex < units.size - 1) {
+        adjustedSize /= 1024
+        unitIndex++
+    }
+    return String.format("%.2f %s", adjustedSize, units[unitIndex])
+}
+
+/**
+ * 删除文件
+ */
+
+fun deleteRecursive(fileOrDirectory: File): Boolean {
+    if (fileOrDirectory.isDirectory) {
+        val children = fileOrDirectory.listFiles()
+        if (children != null && children.isNotEmpty()) {
+            for (child in children) {
+                val success = deleteRecursive(child)
+                if (!success) {
+                    return false
+                }
+            }
+        }
+    }
+    return fileOrDirectory.delete()
 }

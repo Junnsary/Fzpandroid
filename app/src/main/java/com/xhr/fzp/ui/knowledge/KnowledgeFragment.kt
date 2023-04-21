@@ -5,22 +5,22 @@ import com.xhr.fzp.R
 import com.xhr.fzp.base.BaseFragment
 import com.xhr.fzp.databinding.FragmentKnowledgeBinding
 import com.xhr.fzp.ui.knowledge.articlevideo.ArticleVideoActivity
-import com.xhr.fzp.ui.knowledge.recommendation.RecommFragment
+import com.xhr.fzp.ui.knowledge.recommendation.RecommendationFragment
 import com.xhr.fzp.ui.login.LoginActivity
 import com.xhr.fzp.utils.replaceFragment
 
 class KnowledgeFragment : BaseFragment<FragmentKnowledgeBinding>() {
-    private lateinit var recommFragment : RecommFragment
+    private lateinit var mRecommendationFragment : RecommendationFragment
 
     override fun initData() {
-        recommFragment = RecommFragment()
+        mRecommendationFragment = RecommendationFragment()
     }
 
     override fun initView() {
         binding.tvTest.setOnClickListener {
             startActivity(Intent(activity, LoginActivity::class.java))
         }
-        replaceFragment(R.id.fl_recommendation, recommFragment)
+        replaceFragment(R.id.fl_recommendation, mRecommendationFragment)
     }
 
     override fun initListener() {

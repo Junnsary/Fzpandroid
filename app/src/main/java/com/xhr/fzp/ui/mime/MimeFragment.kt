@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.xhr.fzp.R
 import com.xhr.fzp.base.BaseFragment
 import com.xhr.fzp.databinding.FragmentMimeBinding
-import com.xhr.fzp.mode.state.UserContext
+import com.xhr.fzp.utils.state.UserContext
 import com.xhr.fzp.ui.favorites.FavoritesActivity
 import com.xhr.fzp.ui.setting.SettingActivity
 import com.xhr.fzp.utils.LogUtil

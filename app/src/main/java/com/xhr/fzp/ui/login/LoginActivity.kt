@@ -9,7 +9,7 @@ import com.xhr.fzp.R
 import com.xhr.fzp.base.BaseActivity
 import com.xhr.fzp.databinding.ActivityLoginBinding
 import com.xhr.fzp.logic.model.User
-import com.xhr.fzp.mode.state.UserContext
+import com.xhr.fzp.utils.state.UserContext
 import com.xhr.fzp.ui.signup.SignupActivity
 import com.xhr.fzp.utils.LoadingDialog
 import com.xhr.fzp.utils.showToast

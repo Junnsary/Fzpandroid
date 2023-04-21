@@ -18,6 +18,14 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    android.applicationVariants.all {
+        variant ->
+            variant.outputs.all {
+                // 此处指定生成的apk文件名
+                outputFileName = "fangzhapian.apk"
+            }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -44,40 +52,34 @@ android {
     }
 }
 
-dependencies {
 
+
+dependencies {
     //viewpage2
     implementation "androidx.viewpager2:viewpager2:1.0.0"
     // retrofit做网络请求
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
     //gson转换
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
     //使用livedata
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.1"
-    //permissionx
-    implementation 'com.guolindev.permissionx:permissionx:1.7.1'
+    //viewModel
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
     //glide
     implementation 'com.github.bumptech.glide:glide:4.15.0'
-    implementation 'androidx.annotation:annotation:1.6.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.15.0'
-
-//    implementation 'com.danikula:videocache:2.7.1'
-
+    //播放视频
     implementation 'com.github.CarGuo.GSYVideoPlayer:GSYVideoPlayer:v8.3.5-release-jitpack'
-
+    //下拉刷新
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
-
+    //fragment的函数式api
     implementation "androidx.fragment:fragment-ktx:1.5.6"
-    implementation "androidx.activity:activity-ktx:1.7.0"
-
+    //room
     def room_version = "2.5.1"
-
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
     implementation("androidx.room:room-ktx:$room_version")
-
-    //圆形图片
+    //显示圆形图片控件
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
     implementation 'androidx.core:core-ktx:1.9.0'

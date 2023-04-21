@@ -10,7 +10,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.xhr.fzp.base.BaseActivity
 import com.xhr.fzp.databinding.ActivityArticleVideoBinding
 import com.xhr.fzp.ui.source.SourceFragment
-import java.net.ConnectException
 
 class ArticleVideoActivity : BaseActivity<ActivityArticleVideoBinding>() {
     companion object {
@@ -62,11 +61,9 @@ class ArticleVideoActivity : BaseActivity<ActivityArticleVideoBinding>() {
                 }
             }
             result.onFailure {
-                if (it is ConnectException) {
-                    binding.srlRefreshTag.isEnabled = true
-                    binding.tvFailure.visibility = View.VISIBLE
-                    binding.lllTlVp.visibility = View.GONE
-                }
+                binding.srlRefreshTag.isEnabled = true
+                binding.tvFailure.visibility = View.VISIBLE
+                binding.lllTlVp.visibility = View.GONE
                 binding.srlRefreshTag.isRefreshing = false
             }
         }
@@ -75,11 +72,10 @@ class ArticleVideoActivity : BaseActivity<ActivityArticleVideoBinding>() {
 
     override fun initView() {
         binding.srlRefreshTag.isEnabled = false
-//        binding.tlArticleVideo.setNavigationIcon(R.id.)
         setSupportActionBar(binding.tlArticleVideo)
         supportActionBar?.let {
             it.setDisplayHomeAsUpEnabled(true)
-            it.title = ""
+            it.title = "学习区"
         }
     }
 
