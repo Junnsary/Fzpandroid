@@ -8,8 +8,6 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface VideoService {
-    @GET("api/video/")
-    fun getVideoListByTag(@Query("tagid") tagId: Int) : Call<FzpResponse<List<Video>>>
     @GET("api/video/{id}")
     fun getVideoInfo(@Path("id") id: Int) : Call<FzpResponse<Video>>
 }

@@ -23,7 +23,7 @@ class VideoFragment(private val sourceId: Int) : BaseFragment<FragmentVideoBindi
                 binding.tvVideoManagerName.text = video.manager.name
                 binding.tvVideoDetailDate.text = video.createdAt.toString()
                 val url = FzpServiceCreator.getVideoFilePath(video.fileName)
-                LogUtil.d(this, url)
+//                LogUtil.d(this, url)
                 binding.sgpVideo.setUp(url, true, "")
                 val coverImage = ImageView(activity)
                 coverImage.scaleType = ImageView.ScaleType.CENTER_CROP

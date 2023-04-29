@@ -51,8 +51,6 @@ class InfoFragment : BaseFragment<FragmentInfoBinding> {
                     binding.llTlVp.visibility = View.VISIBLE
                     binding.srlInfo.isEnabled = false
                     binding.tvFailure.visibility = View.GONE
-                    // 合并起来tag的一个fragment
-//                    LogUtil.d(this, it.toString())
                     viewModel.tagList.clear()
                     viewModel.tagList.addAll(it)
                     if (sum) {
@@ -69,7 +67,6 @@ class InfoFragment : BaseFragment<FragmentInfoBinding> {
                         override fun createFragment(position: Int) = viewModel.fragments[position]
                     }
                     binding.vpInfoList.offscreenPageLimit = 1
-//                binding.vpInfoList.offscreenPageLimit = 4
                     TabLayoutMediator(binding.tlInfoTag, binding.vpInfoList) { tab, position ->
                         tab.text = viewModel.tagList[position].name
                     }.attach()
@@ -77,8 +74,6 @@ class InfoFragment : BaseFragment<FragmentInfoBinding> {
             }
 
             result.onFailure {
-//                LogUtil.d(this, "case获取失败！")
-//                LogUtil.d(this, it.javaClass.simpleName)
                 binding.tvFailure.visibility = View.VISIBLE
                 binding.llTlVp.visibility = View.GONE
                 binding.srlInfo.isEnabled = true

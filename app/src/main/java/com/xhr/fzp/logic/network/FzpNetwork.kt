@@ -14,7 +14,6 @@ object FzpNetwork {
     /**
      * 获取动态动态代理对象
      */
-    private val articleService = FzpServiceCreator.create<ArticleService>()
     private val videoService = FzpServiceCreator.create<VideoService>()
     private val tagService = FzpServiceCreator.create<TagService>()
     private val sourceService = FzpServiceCreator.create<SourceService>()
@@ -27,11 +26,6 @@ object FzpNetwork {
     /**
      * 获取api接口数据
      */
-    suspend fun getArticleListByTag(tagId: String) =
-        articleService.getArticleListByTag(tagId).await()
-
-    suspend fun getArticle(id: Int) = articleService.getArticle(id).await()
-    suspend fun getVideoListByTag(tagId: Int) = videoService.getVideoListByTag(tagId).await()
     suspend fun getTags(type: String, category: String) = tagService.getTags(type, category).await()
     suspend fun getKnowledge() = tagService.getKnowledge().await()
     suspend fun getSourceList(type: String, tagId: String) =
@@ -78,7 +72,6 @@ object FzpNetwork {
 
     suspend fun getFavoritesList(userId: String) = favoritesService.getFavoritesList(userId).await()
 
-    suspend fun getAllCase() = articleService.getAllCase().await()
 
     private suspend fun <T> Call<T>.await() = suspendCoroutine { continuation ->
         enqueue(object : Callback<T> {

@@ -2,7 +2,7 @@
     <string name="app_name">大学生防诈骗知识平台</string>
     <string name="activity_mian_study_str">学习</string>
     <string name="activity_main_case_str">案例</string>
-    <string name="activity_main_mine_str">我的</string>
+    <string name="activity_main_mine_str">个人</string>
     <string name="avatar">avatar</string>
     <string name="comment_send_success">评论已发布</string>
     <string name="comment_send_fail">评论发布失败</string>

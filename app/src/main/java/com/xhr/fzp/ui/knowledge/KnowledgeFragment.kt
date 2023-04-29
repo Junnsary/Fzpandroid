@@ -10,17 +10,13 @@ import com.xhr.fzp.ui.login.LoginActivity
 import com.xhr.fzp.utils.replaceFragment
 
 class KnowledgeFragment : BaseFragment<FragmentKnowledgeBinding>() {
-    private lateinit var mRecommendationFragment : RecommendationFragment
-
-    override fun initData() {
-        mRecommendationFragment = RecommendationFragment()
-    }
 
     override fun initView() {
+        val recommendationFragment = RecommendationFragment()
         binding.tvTest.setOnClickListener {
             startActivity(Intent(activity, LoginActivity::class.java))
         }
-        replaceFragment(R.id.fl_recommendation, mRecommendationFragment)
+        replaceFragment(R.id.fl_recommendation, recommendationFragment)
     }
 
     override fun initListener() {

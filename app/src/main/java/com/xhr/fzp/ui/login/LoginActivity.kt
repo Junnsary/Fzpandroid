@@ -25,19 +25,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     private var isUserIdInput = false
     private var isUserPasswdInput = false
     override fun initData() {
-//        viewModel.AvatarLD.observe(this){ result ->
-//            val avatar = result.getOrNull()
-//            if (avatar != null) {
-////                LogUtil.d(this, avatar.bytes().size.toString())
-////                LogUtil.d(this, avatar.contentLength().toInt().toString())
-////                val t = avatar.bytes().clone()
-////                avatar.bytes().
-//                val img = BitmapFactory.decodeStream(avatar.byteStream())
-//                binding.imageView.setImageBitmap(img)
-//            } else {
-//                LogUtil.d(this, "接收不到")
-//            }
-//        }
 
         viewModel.userLoginLD.observe(this) { result ->
             val user = result.getOrNull()
@@ -74,8 +61,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
             loginLoadingShow()
             val id = binding.etUserId.text.toString()
             val passwd = binding.etUserPasswd.text.toString()
-//            LogUtil.d(this, binding.etUserId.text.toString())
-//            LogUtil.d(this, binding.etUserPasswd.text.toString())
             viewModel.userLogin(User(id, "", "", passwd, ""))
         }
 

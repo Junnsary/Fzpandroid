@@ -8,6 +8,7 @@ import com.xhr.fzp.base.BaseFragment
 import com.xhr.fzp.databinding.FragmentMimeBinding
 import com.xhr.fzp.utils.state.UserContext
 import com.xhr.fzp.ui.favorites.FavoritesActivity
+import com.xhr.fzp.ui.personal.PersonalActivity
 import com.xhr.fzp.ui.setting.SettingActivity
 import com.xhr.fzp.utils.LogUtil
 import com.xhr.fzp.utils.quickStartActivity
@@ -35,17 +36,19 @@ class MimeFragment :  BaseFragment<FragmentMimeBinding>(){
 
     override fun initView() {
         if (viewModel.isUserLogin()) {
-//            LogUtil.d(this, "有用户！")
             setUserLogin()
         } else {
-//            LogUtil.d(this, "没有用户！")
             setUserLogout()
         }
     }
 
     override fun initListener() {
         binding.llLogin.setOnClickListener {
-            UserContext.login(activity) {}
+            UserContext.login(activity) {
+                activity?.let {
+                    it.quickStartActivity<PersonalActivity>()
+                }
+            }
         }
         binding.rlSetting.setOnClickListener {
             activity?.let{
@@ -81,6 +84,7 @@ class MimeFragment :  BaseFragment<FragmentMimeBinding>(){
             LogUtil.d(this, "获取网络图片")
             viewModel.getNetAvatar(user.avatar)
         }
+
         binding.llOptions.visibility = View.VISIBLE
     }
 

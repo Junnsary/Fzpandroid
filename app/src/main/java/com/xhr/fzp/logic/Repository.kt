@@ -41,32 +41,6 @@ object Repository {
         }
 
     /**
-     * 获取文章
-     */
-    fun getArticleListByTag(tagId: String) = fire() {
-        val articleList = FzpNetwork.getArticleListByTag(tagId)
-        if (articleList.success) {
-            val data = articleList.data
-            Result.success(data)
-        } else {
-            Result.failure(RuntimeException("response success is ${articleList.message}"))
-        }
-    }
-
-    /**
-     * 获取视频
-     */
-    fun getVideoListByTag(tagId: Int) = fire {
-        val videoList = FzpNetwork.getVideoListByTag(tagId)
-        if (videoList.success) {
-            val data = videoList.data
-            Result.success(data)
-        } else {
-            Result.failure(RuntimeException("response success is ${videoList.success}"))
-        }
-    }
-
-    /**
      * 获取标签
      */
     fun getTags(type: String, category: String) = fire() {
@@ -225,13 +199,5 @@ object Repository {
         }
     }
 
-    fun getAllCase() = fire {
-        val result = FzpNetwork.getAllCase()
-        if (result.success) {
-            val data = result.data
-            Result.success(data)
-        } else {
-            Result.failure(RuntimeException("response success is ${result.success}"))
-        }
-    }
+
 }

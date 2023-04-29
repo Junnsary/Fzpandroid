@@ -89,7 +89,6 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
             if (data != null) {
                 if (data.success) {
                     "添加收藏成功".showToast()
-//                    binding.tvCollect.setTextColor(getColor(android.R.color.holo_red_dark))
                     gotFavourite()
                     isCollect = true
                 } else {
@@ -104,7 +103,6 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
             if (data != null) {
                 if (data.success) {
                     "取消收藏成功".showToast()
-//                    binding.tvCollect.setTextColor(getColor(R.color.black))
                     noFavourite()
                     isCollect = false
                 } else {
@@ -153,22 +151,6 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
     }
 
     override fun initListener() {
-//        binding.tvCollect.setOnClickListener {
-//            UserContext.collect(this) {
-//                if (collectClick) {
-//                    if (isCollect) {
-//                        viewModel.cancelUserFavorites(sourceId, tagId)
-//                    } else {
-//                        viewModel.addUserFavorites(sourceId, tagId)
-//                    }
-//                    collectClick = false
-//                }
-//            }
-//        }
-//
-//        binding.tvReturn.setOnClickListener {
-//            finish()
-//        }
 
         binding.etCommentContent.setOnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
