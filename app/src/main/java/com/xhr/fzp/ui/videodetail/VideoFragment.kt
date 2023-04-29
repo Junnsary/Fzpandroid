@@ -9,6 +9,7 @@ import com.xhr.fzp.base.BaseFragment
 import com.xhr.fzp.databinding.FragmentVideoBinding
 import com.xhr.fzp.logic.network.FzpServiceCreator
 import com.xhr.fzp.utils.LogUtil
+import com.xhr.fzp.utils.formatDateTime
 
 class VideoFragment(private val sourceId: Int) : BaseFragment<FragmentVideoBinding>() {
 
@@ -21,7 +22,8 @@ class VideoFragment(private val sourceId: Int) : BaseFragment<FragmentVideoBindi
             if (video != null) {
                 binding.tvVideoDetailTitle.text = video.title
                 binding.tvVideoManagerName.text = video.manager.name
-                binding.tvVideoDetailDate.text = video.createdAt.toString()
+                binding.tvVideoDetailDate.text = formatDateTime(video.createdAt)
+
                 val url = FzpServiceCreator.getVideoFilePath(video.fileName)
 //                LogUtil.d(this, url)
                 binding.sgpVideo.setUp(url, true, "")
