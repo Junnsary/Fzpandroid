@@ -24,6 +24,7 @@
         app:itemTextColor="@drawable/selector_home_bnv"
         app:itemIconTint="@drawable/selector_home_bnv"
         android:background="@color/theme_white_fa"
+        app:labelVisibilityMode="labeled"
         android:layout_height="wrap_content"/>
 
 </LinearLayout>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_focus"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:elevation="5dp"
+        android:background="@color/theme_white_fa"
+        android:orientation="horizontal">
+
+
+        <EditText
+            android:id="@+id/et_search_keywords"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/send_comment_edit_shape"
+            android:hint="请输入 关键字 搜索"
+            android:paddingLeft="10dp"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btn_search_send"
+            android:layout_width="70dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:background="@drawable/comment_send_btn_shape"
+            android:text="搜索"
+            android:textColor="@color/theme_white_fa"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"/>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_search_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <TextView
+        android:id="@+id/tv_null_result"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="无相关内容"/>
+
+
+
+</LinearLayout>

@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Fzp"
         tools:targetApi="33">
         <activity
+            android:name=".ui.search.SearchFragment"
+            android:exported="false" />
+        <activity
             android:name=".ui.personal.PersonalActivity"
             android:exported="false" />
         <activity
@@ -49,7 +52,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.home.HomeActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>

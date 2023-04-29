@@ -13,5 +13,7 @@ interface SourceService {
 
     @GET("api/sources/recommendation")
     fun getRecommList(@Query("num") type: Int) : Call<FzpResponse<List<Source>>>
+    @GET("api/sources/search")
+    fun getSearchList(@Query("keywords") keywords: String) : Call<FzpResponse<List<Source>>>
 
 }

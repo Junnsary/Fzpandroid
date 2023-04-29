@@ -19,4 +19,5 @@
     <string name="article_knowledge_str">文章学习</string>
     <string name="video_knowledge_str">视频学习</string>
     <string name="comment_edit_hit_text">发表您的评论</string>
+    <string name="activity_main_search_str">搜索</string>
 </resources>

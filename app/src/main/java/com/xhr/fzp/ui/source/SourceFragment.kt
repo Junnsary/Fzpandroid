@@ -18,7 +18,7 @@ class SourceFragment(private val tags: List<Tag>) : BaseFragment<FragmentSourceB
 
         viewModel.sourceListLD.observe(this) {
             val sources = it.getOrNull()
-            if (sources != null && sources.isNotEmpty()) {
+            if (!sources.isNullOrEmpty()) {
                 updateAdapter(sources)
             }
             stopRefresh()

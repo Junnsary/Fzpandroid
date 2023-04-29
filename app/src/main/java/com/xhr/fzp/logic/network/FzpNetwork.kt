@@ -1,5 +1,6 @@
 package com.xhr.fzp.logic.network
 
+import com.google.android.exoplayer2.drm.KeysExpiredException
 import com.xhr.fzp.logic.model.User
 import com.xhr.fzp.ui.detail.DetailViewModel
 import retrofit2.Call
@@ -72,6 +73,7 @@ object FzpNetwork {
 
     suspend fun getFavoritesList(userId: String) = favoritesService.getFavoritesList(userId).await()
 
+    suspend fun getSearchList(keywords: String) = sourceService.getSearchList(keywords).await()
 
     private suspend fun <T> Call<T>.await() = suspendCoroutine { continuation ->
         enqueue(object : Callback<T> {

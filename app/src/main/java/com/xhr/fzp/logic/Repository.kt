@@ -199,5 +199,15 @@ object Repository {
         }
     }
 
+    fun getSearchList(keywords: String) = fire() {
+        val result = FzpNetwork.getSearchList(keywords)
+        if (result.success) {
+            val data = result.data
+            Result.success(data)
+        } else {
+            Result.failure(RuntimeException("response success is ${result.success}"))
+        }
+    }
+
 
 }

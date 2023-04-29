@@ -9,6 +9,10 @@
         android:icon="@mipmap/case1"
         android:title="@string/activity_main_case_str" />
     <item
+        android:id="@+id/menu_item_search"
+        android:icon="@mipmap/search"
+        android:title="@string/activity_main_search_str" />
+    <item
         android:id="@+id/menu_item_mime"
         android:icon="@mipmap/mime"
         android:title="@string/activity_main_mine_str" />
