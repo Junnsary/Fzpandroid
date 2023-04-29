@@ -37,8 +37,10 @@ class InfoFragment : BaseFragment<FragmentInfoBinding> {
         const val VIDEO = "video"
         const val KNOWLEDGE = "knowledge"
         const val CASE = "case"
+        const val ARTICLEVIDEO = "articlevideo"
 
         fun getVideoCase(sum: Boolean = false) = InfoFragment(ARTICLE, CASE, sum)
+        fun getVideoArticleCase(sum: Boolean = false) = InfoFragment(ARTICLEVIDEO, CASE, sum)
     }
 
     private val viewModel by lazy { ViewModelProvider(this)[InfoViewModel::class.java] }
