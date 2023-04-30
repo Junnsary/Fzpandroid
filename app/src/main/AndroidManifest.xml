@@ -16,6 +16,19 @@
         android:theme="@style/Theme.Fzp"
         tools:targetApi="33">
         <activity
+            android:name=".ui.question.questiondetail.QuestionDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.question.myquestion.MyQuestionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.question.askquestion.AskQuestionActivity"
+            android:exported="false"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name=".ui.search.SearchActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.search.SearchFragment"
             android:exported="false" />
         <activity

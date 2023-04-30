@@ -6,12 +6,13 @@ import androidx.lifecycle.ViewModelProvider
 import com.xhr.fzp.R
 import com.xhr.fzp.base.BaseFragment
 import com.xhr.fzp.databinding.FragmentMimeBinding
-import com.xhr.fzp.utils.state.UserContext
 import com.xhr.fzp.ui.favorites.FavoritesActivity
+import com.xhr.fzp.ui.question.myquestion.MyQuestionActivity
 import com.xhr.fzp.ui.personal.PersonalActivity
 import com.xhr.fzp.ui.setting.SettingActivity
 import com.xhr.fzp.utils.LogUtil
 import com.xhr.fzp.utils.quickStartActivity
+import com.xhr.fzp.utils.state.UserContext
 
 class MimeFragment :  BaseFragment<FragmentMimeBinding>(){
 
@@ -59,6 +60,11 @@ class MimeFragment :  BaseFragment<FragmentMimeBinding>(){
         binding.rlFavorites.setOnClickListener {
             activity?.let{
                 it.quickStartActivity<FavoritesActivity>()
+            }
+        }
+        binding.rlQuestion.setOnClickListener {
+            activity?.let{
+                it.quickStartActivity<MyQuestionActivity>()
             }
         }
     }

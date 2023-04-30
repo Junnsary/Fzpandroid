@@ -14,13 +14,13 @@ import androidx.lifecycle.ViewModelProvider
 import com.xhr.fzp.R
 import com.xhr.fzp.base.BaseActivity
 import com.xhr.fzp.databinding.ActivityDetailBinding
-import com.xhr.fzp.utils.state.UserContext
 import com.xhr.fzp.ui.articledetail.ArticleFragment
 import com.xhr.fzp.ui.comment.CommentFragment
 import com.xhr.fzp.ui.videodetail.VideoFragment
 import com.xhr.fzp.utils.LogUtil
 import com.xhr.fzp.utils.replaceFragment
 import com.xhr.fzp.utils.showToast
+import com.xhr.fzp.utils.state.UserContext
 
 class DetailActivity : BaseActivity<ActivityDetailBinding>() {
     /**
@@ -131,7 +131,6 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
 
     override fun initView() {
         if (viewModel.isUserLogin()) {
-//            LogUtil.d(this, "已登录")
             viewModel.isUserCollect(sourceId, tagId)
         }
 
@@ -151,13 +150,9 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
     }
 
     override fun initListener() {
-
         binding.etCommentContent.setOnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
-                LogUtil.d(this, "获得焦点！")
                 UserContext.comment(this) {}
-            } else {
-                LogUtil.d(this, "失去焦点！")
             }
         }
 

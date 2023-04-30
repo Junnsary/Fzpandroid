@@ -2,29 +2,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/theme_white_f3"
-    android:layout_height="match_parent">
+    android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tb_home"
-        style="@style/toolbar_default_style"/>
+        style="@style/toolbar_default_style" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vp_home"
-        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="0dp"/>
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bnv_home"
         android:layout_width="match_parent"
-        app:menu="@menu/activity_main_bnv"
-        app:itemTextColor="@drawable/selector_home_bnv"
-        app:itemIconTint="@drawable/selector_home_bnv"
+        android:layout_height="wrap_content"
         android:background="@color/theme_white_fa"
+        app:itemIconTint="@drawable/selector_home_bnv"
+        app:itemTextColor="@drawable/selector_home_bnv"
         app:labelVisibilityMode="labeled"
-        android:layout_height="wrap_content"/>
+        app:menu="@menu/menu_home_bnv" />
 
 </LinearLayout>

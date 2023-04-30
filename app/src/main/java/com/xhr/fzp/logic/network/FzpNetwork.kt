@@ -1,8 +1,10 @@
 package com.xhr.fzp.logic.network
 
-import com.google.android.exoplayer2.drm.KeysExpiredException
+import com.xhr.fzp.logic.model.Answer
+import com.xhr.fzp.logic.model.Question
 import com.xhr.fzp.logic.model.User
 import com.xhr.fzp.ui.detail.DetailViewModel
+import com.xhr.fzp.utils.formatDateTime
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -22,6 +24,8 @@ object FzpNetwork {
     private val imageService = FzpServiceCreator.create<ImageService>()
     private val commentService = FzpServiceCreator.create<CommentService>()
     private val favoritesService = FzpServiceCreator.create<FavoritesService>()
+    private val questionService = FzpServiceCreator.create<QuestionService>()
+    private val answerService = FzpServiceCreator.create<AnswerService>()
 
 
     /**
@@ -75,6 +79,18 @@ object FzpNetwork {
 
     suspend fun getSearchList(keywords: String) = sourceService.getSearchList(keywords).await()
 
+    suspend fun sendAskQuestion(question: Question) =
+        questionService.sendAskQuestion(question.user.id, question.content).await()
+
+    suspend fun getQuestionList(userId: String, review: Int) =
+        questionService.getQuestionList(userId, review).await()
+
+    suspend fun getAnswerList(questionId: Int) = answerService.getAnswerList(questionId).await()
+    suspend fun addAnswer(answer: Answer) = answerService.addAnswer(
+        answer.content, answer.questionId, formatDateTime(answer.createdAt), answer.user.id
+    ).await()
+
+
     private suspend fun <T> Call<T>.await() = suspendCoroutine { continuation ->
         enqueue(object : Callback<T> {
             override fun onResponse(call: Call<T>, response: Response<T>) {
@@ -91,4 +107,6 @@ object FzpNetwork {
             }
         })
     }
+
+
 }

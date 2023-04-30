@@ -6,6 +6,8 @@ import androidx.lifecycle.liveData
 import com.xhr.fzp.FzpApplication
 import com.xhr.fzp.logic.dao.ExternalStorageDao
 import com.xhr.fzp.logic.dao.UserDao
+import com.xhr.fzp.logic.model.Answer
+import com.xhr.fzp.logic.model.Question
 import com.xhr.fzp.logic.model.User
 import com.xhr.fzp.logic.network.FzpNetwork
 import com.xhr.fzp.logic.room.database.AppDatabase
@@ -207,6 +209,37 @@ object Repository {
         } else {
             Result.failure(RuntimeException("response success is ${result.success}"))
         }
+    }
+
+    fun sendAskQuestion(question: Question) = fire() {
+        val result = FzpNetwork.sendAskQuestion(question)
+        Result.success(result.success)
+    }
+
+    fun getAnswerList(questionId: Int) = fire() {
+        val result = FzpNetwork.getAnswerList(questionId)
+        if (result.success) {
+            val data = result.data
+            Result.success(data)
+        } else {
+            Result.failure(RuntimeException("response success is ${result.success}"))
+        }
+    }
+
+
+    fun getQuestionList(userId: String, review: Int) = fire {
+        val result = FzpNetwork.getQuestionList(userId, review)
+        if (result.success) {
+            val data = result.data
+            Result.success(data)
+        } else {
+            Result.failure(RuntimeException("response success is ${result.success}"))
+        }
+    }
+
+    fun addAnswer(answer: Answer) = fire {
+        val result = FzpNetwork.addAnswer(answer)
+        Result.success(result.success)
     }
 
 

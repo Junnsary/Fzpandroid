@@ -37,7 +37,7 @@ class CommentAdapter(private val fragment: Fragment, private val commentList: Li
         holder.commentDate.text = formatDateTime(comment.createdAt)
         holder.userName.text = comment.user.name
         LogUtil.d(this, comment.user.avatar)
-        useGlideSetImage(fragment, FzpServiceCreator.getUserAvatarUrl(comment.user.avatar), holder.userAvatar)
+        useGlideSetImage(fragment.activity, FzpServiceCreator.getUserAvatarUrl(comment.user.avatar), holder.userAvatar)
     }
 
 

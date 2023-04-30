@@ -80,9 +80,9 @@ fun Context.createDialog(msg: String) =
 /**
  * 填充图片
  */
-fun useGlideSetImage(fragment: Fragment, url: String, imageView: ImageView) {
+fun useGlideSetImage(context: Context?, url: String, imageView: ImageView) {
     Glide
-        .with(fragment)
+        .with(context!!)
         .load(url)
         .into(imageView)
 }

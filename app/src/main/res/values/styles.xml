@@ -113,5 +113,14 @@
         <item name="android:backgroundDimEnabled">true</item>
     </style>
 
+    <style name="ToolbarMenuFontSize" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="dividing_line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/dividing_line_color</item>
+    </style>
 
 </resources>

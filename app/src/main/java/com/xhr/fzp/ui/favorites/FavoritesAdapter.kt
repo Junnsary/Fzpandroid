@@ -43,13 +43,13 @@ class FavoritesAdapter(
             holder.itemView.setOnClickListener {
                 fragment.activity?.let { it1 -> DetailActivity.actionStart(it1, favorites.source.id, favorites.source.tag.id, DetailActivity.ARTICLE) }
             }
-            useGlideSetImage(fragment, FzpServiceCreator.getNetworkImageURL(favorites.source.cover), holder.cover)
+            useGlideSetImage(fragment.activity, FzpServiceCreator.getNetworkImageURL(favorites.source.cover), holder.cover)
         } else {
             holder.itemView.setOnClickListener {
                 fragment.activity?.let { it1 -> DetailActivity.actionStart(it1, favorites.source.id, favorites.source.tag.id, DetailActivity.VIDEO) }
             }
             holder.play.visibility = View.VISIBLE
-            useGlideSetImage(fragment, FzpServiceCreator.getNetworkImageURL(favorites.source.cover), holder.cover)
+            useGlideSetImage(fragment.activity, FzpServiceCreator.getNetworkImageURL(favorites.source.cover), holder.cover)
         }
         holder.date.text = formatDate(favorites.createdAt)
         holder.name.text = favorites.source.manager.name
