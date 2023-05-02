@@ -26,6 +26,7 @@ object FzpNetwork {
     private val favoritesService = FzpServiceCreator.create<FavoritesService>()
     private val questionService = FzpServiceCreator.create<QuestionService>()
     private val answerService = FzpServiceCreator.create<AnswerService>()
+    private val userTopicService = FzpServiceCreator.create<UserTopicService>()
 
 
     /**
@@ -89,6 +90,7 @@ object FzpNetwork {
     suspend fun addAnswer(answer: Answer) = answerService.addAnswer(
         answer.content, answer.questionId, formatDateTime(answer.createdAt), answer.user.id
     ).await()
+    suspend fun getUserTopicList(userId: String) = userTopicService.getUserTopicList(userId).await()
 
 
     private suspend fun <T> Call<T>.await() = suspendCoroutine { continuation ->

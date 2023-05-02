@@ -14,12 +14,13 @@ import com.xhr.fzp.ui.mime.MimeFragment
 import com.xhr.fzp.ui.question.QuestionFragment
 import com.xhr.fzp.ui.question.askquestion.AskQuestionActivity
 import com.xhr.fzp.ui.search.SearchActivity
+import com.xhr.fzp.ui.topictest.TopicTestFragment
 import com.xhr.fzp.utils.quickStartActivity
 import com.xhr.fzp.utils.state.UserContext
 
 class HomeActivity : BaseActivity<ActivityHomeBinding>() {
 
-    val fragments = arrayOf(KnowledgeFragment(), CaseFragment(),QuestionFragment("", 1), MimeFragment())
+    val fragments = arrayOf(KnowledgeFragment(), CaseFragment(),QuestionFragment("", 1), TopicTestFragment(), MimeFragment())
     override fun initView() {
         setSupportActionBar(binding.tbHome)
         supportActionBar?.let {
@@ -60,8 +61,15 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
                     binding.tbHome.menu.findItem(R.id.action_search).isVisible = false
                     binding.tbHome.menu.findItem(R.id.action_question).isVisible = true
                 }
-                R.id.menu_item_mime -> {
+                R.id.menu_item_topic_test -> {
                     binding.vpHome.setCurrentItem(3, false)
+                    binding.tbHome.title = getString(R.string.menu_home_bnv_test_str)
+                    binding.tbHome.elevation = 5f
+                    binding.tbHome.menu.findItem(R.id.action_search).isVisible = false
+                    binding.tbHome.menu.findItem(R.id.action_question).isVisible = false
+                }
+                R.id.menu_item_mime -> {
+                    binding.vpHome.setCurrentItem(4, false)
                     binding.tbHome.title = getString(R.string.activity_main_mine_str)
                     binding.tbHome.elevation = 5f
                     binding.tbHome.menu.findItem(R.id.action_search).isVisible = false

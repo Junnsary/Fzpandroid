@@ -13,6 +13,10 @@
         android:icon="@mipmap/questionanwser"
         android:title="@string/menu_home_bnv_qa_str" />
     <item
+        android:id="@+id/menu_item_topic_test"
+        android:icon="@mipmap/test"
+        android:title="@string/menu_home_bnv_test_str" />
+    <item
         android:id="@+id/menu_item_mime"
         android:icon="@mipmap/mime"
         android:title="@string/activity_main_mine_str" />

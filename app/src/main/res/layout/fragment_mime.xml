@@ -85,6 +85,25 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/rl_topic_test"
+            style="@style/mime_kino_style">
+
+            <ImageView
+                style="@style/mime_kino_image_style"
+                android:src="@mipmap/blue_test" />
+
+            <TextView
+                style="@style/mime_kino_text_style"
+                android:text="自测情况"/>
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:src="@mipmap/right_in" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/rl_setting"
             style="@style/mime_kino_style">
 

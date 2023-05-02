@@ -11,6 +11,15 @@ object FzpServiceCreator {
     private const val PUBLIC_IMAGE = "uploads/images/"
     private const val PUBLIC_VIDEO = "uploads/videos/"
     private const val GET_ARTICLE = "api/article/"
+    private const val TOPIC_TEST = "api/topic/"
+    private const val USER_TOPIC_TEST_DETAIL = "api/usertopic/detail"
+
+    fun getTopiTestUrl(path: String = "") : String {
+        return BASE_URL + TOPIC_TEST + path
+    }
+    fun getUserTopicDetailUrl(userTopicID: Int) : String {
+        return BASE_URL + USER_TOPIC_TEST_DETAIL + "?usertopicid=${userTopicID}"
+    }
 
     fun getUserAvatarUrl(fileName: String) : String {
         return BASE_URL + PUBLIC_IMAGE + fileName

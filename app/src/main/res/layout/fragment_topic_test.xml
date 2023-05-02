@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.topictest.TopicTestFragment"
+    android:orientation="vertical">
+
+<!--    <WebView-->
+<!--        android:id="@+id/wv_topic_test"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"/>-->
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        app:cardCornerRadius="10dp"
+        android:elevation="5dp"
+        android:layout_centerInParent="true">
+
+
+<!--        <p>自测防诈骗知识的题目的主要目的是帮助您了解自己的防诈骗能力和水平。</p>
+                    <p>这样，您就可以确定哪些方面需要进一步加强，以提高您在遇到诈骗尝试时做出正确决策的能力。</p>
+                    <p>此外，通过检测防诈骗知识的题目，您还可以更好地了解当前诈骗手段的特点和模式。这将帮助您在未来更容易地识别和规避潜在的诈骗行为。</p>-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                android:paddingTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="25sp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="15dp"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:text="关于防诈骗知识题目测试"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/black"
+                    android:text="        自测防诈骗知识的题目的主要目的是帮助您了解自己的防诈骗能力和水平"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/black"
+                    android:text="        这样，您就可以确定哪些方面需要进一步加强，以提高您在遇到诈骗尝试时做出正确决策的能力。"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:text="        此外，通过检测防诈骗知识的题目，您还可以更好地了解当前诈骗手段的特点和模式。这将帮助您在未来更容易地识别和规避潜在的诈骗行为。"/>
+
+            </LinearLayout>
+            <Button
+                android:id="@+id/btn_start_test"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:textColor="@color/theme_white_fa"
+                android:textSize="16sp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/comment_send_btn_shape"
+                android:text="开始测试"/>
+
+        </LinearLayout>
+
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+</RelativeLayout>

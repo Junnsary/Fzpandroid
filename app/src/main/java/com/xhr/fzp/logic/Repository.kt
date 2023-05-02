@@ -237,6 +237,16 @@ object Repository {
         }
     }
 
+    fun getUserTopicList(userId: String) = fire {
+        val result = FzpNetwork.getUserTopicList(userId)
+        if (result.success) {
+            val data = result.data
+            Result.success(data)
+        } else {
+            Result.failure(RuntimeException("response success is ${result.success}"))
+        }
+    }
+
     fun addAnswer(answer: Answer) = fire {
         val result = FzpNetwork.addAnswer(answer)
         Result.success(result.success)
