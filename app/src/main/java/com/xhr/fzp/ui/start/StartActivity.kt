@@ -26,7 +26,7 @@ class StartActivity : BaseActivity<ActivityStartBinding>() {
             )
         }
         CoroutineScope(Dispatchers.Main).launch {
-            delay(0)
+            delay(1000)
             quickStartActivity<HomeActivity>()
             finish()
         }

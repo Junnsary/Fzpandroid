@@ -36,6 +36,7 @@ class QuestionDetailActivity : BaseActivity<ActivityQuestionDetailBinding>() {
     private lateinit var adapter: AnswerAdapter
     private var question: Question? = null
     private lateinit var answer: Answer
+    private lateinit var loadingDialog : LoadingDialog
 
     override fun initData() {
         viewModel.answerListLD.observe(this) { result ->
@@ -52,12 +53,11 @@ class QuestionDetailActivity : BaseActivity<ActivityQuestionDetailBinding>() {
                 viewModel.answerList.add(0, answer)
                 adapter.notifyDataSetChanged()
                 "添加回答成功！".showToast()
-                hideKeyboard(binding.etCommentContent.windowToken)
-                binding.etCommentContent.setText("")
             }
             result.onFailure {
                 "添加回答失败！".showToast()
             }
+            loadingDialog.dismiss()
         }
     }
 
@@ -85,6 +85,7 @@ class QuestionDetailActivity : BaseActivity<ActivityQuestionDetailBinding>() {
                 val content = it.toString().trim()
                 if (content.isNotEmpty()) {
                     binding.btnCommentSend.visibility = View.VISIBLE
+
                 } else {
                     binding.btnCommentSend.visibility = View.GONE
                 }
@@ -99,6 +100,10 @@ class QuestionDetailActivity : BaseActivity<ActivityQuestionDetailBinding>() {
         binding.btnCommentSend.setOnClickListener {
             val content = binding.etCommentContent.text.toString().trim()
             val user = viewModel.getUserInfo()
+            hideKeyboard(binding.etCommentContent.windowToken)
+            binding.etCommentContent.setText("")
+            loadingDialog = LoadingDialog(this, "正在发送")
+            loadingDialog.show()
             answer = Answer(0, content, Date(), question!!.id, user)
             viewModel.addAnswer(answer)
         }

@@ -146,7 +146,7 @@
             android:layout_marginBottom="5dp"
             android:layout_weight="1"
             android:background="@drawable/send_comment_edit_shape"
-            android:hint="@string/comment_edit_hit_text"
+            android:hint="发表您的回答"
             android:paddingLeft="10dp"
             android:textSize="14sp" />
 

@@ -7,22 +7,30 @@ import com.xhr.fzp.R
 import com.xhr.fzp.base.BaseActivity
 import com.xhr.fzp.databinding.ActivityAskQuestionBinding
 import com.xhr.fzp.logic.model.Question
+import com.xhr.fzp.utils.LoadingDialog
 import com.xhr.fzp.utils.setToolbar
 import com.xhr.fzp.utils.showToast
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class AskQuestionActivity : BaseActivity<ActivityAskQuestionBinding>() {
 
     private val viewModel by lazy { ViewModelProvider(this)[AskQuestionViewModel::class.java] }
     private var sendFlag = true
+    private lateinit var loadingDialog: LoadingDialog
     override fun initData() {
         viewModel.sendAskQuestionLD.observe(this) {
             it.onSuccess {
                 "发送成功！请等待审核通过".showToast()
                 binding.etQuestionContent.setText("")
+                finish()
             }
             it.onFailure {
                 "发送失败！请重试".showToast()
             }
+            loadingDialog.dismiss()
             sendFlag = true
         }
     }
@@ -48,11 +56,15 @@ class AskQuestionActivity : BaseActivity<ActivityAskQuestionBinding>() {
     private fun sendQuestion() {
         val questionContent = binding.etQuestionContent.text.toString().trim()
         if (questionContent.isNotEmpty()) {
-            val user = viewModel.getUserInfo()
-            viewModel.sendAskQuestion(Question(questionContent,  user))
+            loadingDialog = LoadingDialog(this, "正在发送...")
+            loadingDialog.show()
+            CoroutineScope(Dispatchers.Main).launch {
+                delay(1000)
+                val user = viewModel.getUserInfo()
+                viewModel.sendAskQuestion(Question(questionContent,  user))
+            }
         }
         sendFlag = false
-        finish()
     }
 
 
