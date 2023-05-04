@@ -127,12 +127,12 @@ object Repository {
 
     fun editUser(avatar: MultipartBody.Part, userName: RequestBody, userEmail: RequestBody, userId: RequestBody) = fire() {
         val userResult = FzpNetwork.editUser(avatar, userName, userEmail, userId)
-        Result.success(userResult.success)
+        Result.success(userResult)
     }
     fun editUserInfo( userName: String, userEmail: String, userId: String) = fire() {
         val userResult = FzpNetwork.editUserInfo(userName, userEmail, userId)
 
-        Result.success(userResult.success)
+        Result.success(userResult)
     }
 
     fun getCommentList(sourceId: Int, tagId: Int) = fire() {

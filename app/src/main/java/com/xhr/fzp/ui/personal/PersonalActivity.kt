@@ -3,42 +3,25 @@ package com.xhr.fzp.ui.personal
 import android.Manifest
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
-import android.provider.ContactsContract.CommonDataKinds.Email
 import android.provider.MediaStore
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.net.toFile
 import androidx.lifecycle.ViewModelProvider
 import com.xhr.fzp.R
 import com.xhr.fzp.base.BaseActivity
 import com.xhr.fzp.databinding.ActivityPersonalBinding
 import com.xhr.fzp.logic.model.User
-import com.xhr.fzp.utils.LoadingDialog
-import com.xhr.fzp.utils.LogUtil
-import com.xhr.fzp.utils.createDialog
-import com.xhr.fzp.utils.isEmailFormat
-import com.xhr.fzp.utils.setToolbar
-import com.xhr.fzp.utils.showToast
+import com.xhr.fzp.utils.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.http.Multipart
-import java.io.BufferedInputStream
 import java.io.File
 import java.io.FileInputStream
-import java.io.InputStream
 
 
 class PersonalActivity : BaseActivity<ActivityPersonalBinding>() {
@@ -141,10 +124,11 @@ class PersonalActivity : BaseActivity<ActivityPersonalBinding>() {
         viewModel.editUserLD.observe(this) { result ->
             result.onSuccess { succ ->
                 "保存成功！".showToast()
-                saveSuccess()
+                LogUtil.d(this, succ.data)
+                saveSuccess(succ.data)
             }
             result.onFailure { fail->
-                LogUtil.d(this, fail.message.toString())
+//                LogUtil.d(this, fail.message.toString())
                 "保存失败".showToast()
             }
             loadingDialog.dismiss()
@@ -212,7 +196,8 @@ class PersonalActivity : BaseActivity<ActivityPersonalBinding>() {
         val name = binding.tvEditUserName.text.toString().trim()
         val email = binding.tvEditUserEmail.text.toString().trim()
         val verify = ArrayList<String>()
-        if (isEmailFormat(email)) {
+//        LogUtil.d(this, email)
+        if (!isEmailFormat(email)) {
             verify.add("邮箱格式不正确")
         }
 
@@ -255,7 +240,7 @@ class PersonalActivity : BaseActivity<ActivityPersonalBinding>() {
         setUserInfo()
     }
 
-    private fun saveSuccess() {
+    private fun saveSuccess(data: String) {
         binding.tlPersonal.menu.findItem(R.id.action_personal_done).isVisible = false
         binding.tlPersonal.menu.findItem(R.id.action_personal_cancel).isVisible = false
         binding.tlPersonal.menu.findItem(R.id.action_personal_modify).isVisible = true
@@ -268,18 +253,17 @@ class PersonalActivity : BaseActivity<ActivityPersonalBinding>() {
         val newName = binding.tvEditUserName.text.toString()
         val newEmail = binding.tvEditUserEmail.text.toString()
         val user = viewModel.getSavedUser()
-        viewModel.saveUser(User(user.id, newEmail, newName, "", ""))
+        viewModel.saveUser(User(user.id, newEmail, newName, "", user.avatar))
 
         binding.tvUserName.text = newName
         binding.tvUserEmail.text = newEmail
 
         if (avatarFile != null) {
+            LogUtil.d(this, data)
             val a = BitmapFactory.decodeStream(FileInputStream(avatarFile))
+            viewModel.saveUser(User(user.id, newEmail, newName, "", data))
             binding.ivAvatar.setImageBitmap(a)
             viewModel.setUserAvatar(a)
         }
-
     }
-
-
 }

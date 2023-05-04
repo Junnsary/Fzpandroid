@@ -15,7 +15,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.util.regex.Pattern
 
 class SignupActivity : BaseActivity<ActivitySignupBinding>() {
 

@@ -34,7 +34,6 @@ import kotlinx.coroutines.launch
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.regex.Pattern
 
 /**
  * 作为字符串对象的扩展函数showToast，就可以快捷显示Toast了
@@ -284,10 +283,6 @@ inline fun <reified T : Parcelable> Intent.parcelable(key: String): T? = when {
 }
 
 fun isEmailFormat(emailStr: String): Boolean {
-    if (emailStr.isNotEmpty()) {
-        val pattern = Pattern.compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}\$\n")
-        val match = pattern.matcher(emailStr)
-        return match.matches()
-    }
-    return false
+    val emailRegex = Regex("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\$")
+    return emailRegex.matches(emailStr)
 }
