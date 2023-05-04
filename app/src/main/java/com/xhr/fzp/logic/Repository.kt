@@ -16,6 +16,8 @@ import com.xhr.fzp.ui.detail.DetailViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import kotlin.coroutines.CoroutineContext
 
 object Repository {
@@ -36,6 +38,7 @@ object Repository {
 ////                LogUtil.d(this, "网络发生错误")
 //                Result.failure(ce)
             } catch (e: Exception) {
+                e.printStackTrace()
                 Result.failure(e)
             }
             emit(result)
@@ -121,6 +124,16 @@ object Repository {
     }
 
     fun clearLocalUserAvatar() = ExternalStorageDao.clearLocalUserAvatar()
+
+    fun editUser(avatar: MultipartBody.Part, userName: RequestBody, userEmail: RequestBody, userId: RequestBody) = fire() {
+        val userResult = FzpNetwork.editUser(avatar, userName, userEmail, userId)
+        Result.success(userResult.success)
+    }
+    fun editUserInfo( userName: String, userEmail: String, userId: String) = fire() {
+        val userResult = FzpNetwork.editUserInfo(userName, userEmail, userId)
+
+        Result.success(userResult.success)
+    }
 
     fun getCommentList(sourceId: Int, tagId: Int) = fire() {
         val commentList = FzpNetwork.getCommentList(sourceId, tagId)

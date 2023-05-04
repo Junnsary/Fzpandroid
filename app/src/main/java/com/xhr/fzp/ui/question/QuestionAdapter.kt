@@ -1,5 +1,6 @@
 package com.xhr.fzp.ui.question
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import com.xhr.fzp.R
 import com.xhr.fzp.logic.model.Question
 import com.xhr.fzp.logic.network.FzpServiceCreator
 import com.xhr.fzp.ui.question.questiondetail.QuestionDetailActivity
+import com.xhr.fzp.utils.LogUtil
 import com.xhr.fzp.utils.formatDateTime
 import com.xhr.fzp.utils.useGlideSetImage
 import de.hdodenhof.circleimageview.CircleImageView
@@ -40,8 +42,11 @@ class QuestionAdapter(private val questionList: List<Question>, private val frag
         when (question.review) {
             1 -> {
                 holder.answerShow.visibility = View.VISIBLE
+
+                LogUtil.d(this, "111111111111111111111111111")
                 holder.itemView.setOnClickListener {
                     fragment.activity?.let {
+                        LogUtil.d(this, "question.id: " + question.id)
                         QuestionDetailActivity.actionStart(it, question)
                     }
                 }

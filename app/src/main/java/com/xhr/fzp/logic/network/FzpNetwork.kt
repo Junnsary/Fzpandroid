@@ -5,6 +5,8 @@ import com.xhr.fzp.logic.model.Question
 import com.xhr.fzp.logic.model.User
 import com.xhr.fzp.ui.detail.DetailViewModel
 import com.xhr.fzp.utils.formatDateTime
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -90,7 +92,18 @@ object FzpNetwork {
     suspend fun addAnswer(answer: Answer) = answerService.addAnswer(
         answer.content, answer.questionId, formatDateTime(answer.createdAt), answer.user.id
     ).await()
+
     suspend fun getUserTopicList(userId: String) = userTopicService.getUserTopicList(userId).await()
+    suspend fun editUser(
+        avatar: MultipartBody.Part,
+        userName: RequestBody,
+        userEmail: RequestBody,
+        userId: RequestBody
+    ) =
+        userService.editUser(avatar, userName, userEmail, userId).await()
+
+    suspend fun editUserInfo(userName: String, userEmail: String, userId: String) =
+        userService.editUserInfo(userName, userEmail, userId).await()
 
 
     private suspend fun <T> Call<T>.await() = suspendCoroutine { continuation ->

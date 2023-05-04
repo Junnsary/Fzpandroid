@@ -5,8 +5,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object FzpServiceCreator {
 
-//    private const val BASE_URL = "http://10.0.2.2:3000/"
-    private const val BASE_URL = "http://47.120.37.7:3000/"
+    private const val BASE_URL = "http://10.0.2.2:3000/"
+//    private const val BASE_URL = "http://47.120.37.7:3000/"
     //用户头像的位置
     private const val PUBLIC_IMAGE = "uploads/images/"
     private const val PUBLIC_VIDEO = "uploads/videos/"

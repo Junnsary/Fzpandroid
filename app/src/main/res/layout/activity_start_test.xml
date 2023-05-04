@@ -12,9 +12,24 @@
         android:elevation="5dp"
         style="@style/toolbar_default_style"/>
 
-    <WebView
-        android:id="@+id/wv_start_test"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/pb_loading_page"
+            android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content"/>
+
+        <WebView
+            android:visibility="gone"
+            android:id="@+id/wv_start_test"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </RelativeLayout>
+
+
 
 </LinearLayout>

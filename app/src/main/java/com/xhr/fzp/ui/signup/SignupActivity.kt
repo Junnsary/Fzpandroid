@@ -10,6 +10,7 @@ import com.xhr.fzp.logic.model.User
 import com.xhr.fzp.utils.LoadingDialog
 import com.xhr.fzp.utils.LogUtil
 import com.xhr.fzp.utils.createDialog
+import com.xhr.fzp.utils.isEmailFormat
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -39,6 +40,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                 }
             }
         }
+
     }
 
     override fun initView() {
@@ -126,14 +128,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
     }
 
     //验证邮箱格式
-    private fun isEmailFormat(emailStr: String): Boolean {
-        if (emailStr.isNotEmpty()) {
-            val pattern = Pattern.compile("\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*")
-            val match = pattern.matcher(emailStr)
-            return match.matches()
-        }
-        return false
-    }
+
 
     private fun showDialog(msg: String) {
         dialog = createDialog(msg)

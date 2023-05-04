@@ -61,14 +61,14 @@ class QuestionDetailActivity : BaseActivity<ActivityQuestionDetailBinding>() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+
     override fun initView() {
         setToolbar(binding.tlQuestionDetail)
         adapter = AnswerAdapter(viewModel.answerList, this)
         binding.rvAnswer.layoutManager = LinearLayoutManager(this)
         binding.rvAnswer.adapter = adapter
 
-        question = intent.getSerializableExtra("question", Question::class.java)
+        question = intent.parcelable("question")
         question?.let {
             binding.tvQuestionDetailUserName.text = it.user.name
             binding.tvQuestionDetailDate.text = formatDateTime(it.createdAt)

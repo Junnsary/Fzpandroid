@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
+import android.os.Build.VERSION.SDK_INT
+import android.os.Parcelable
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -32,6 +34,7 @@ import kotlinx.coroutines.launch
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.regex.Pattern
 
 /**
  * 作为字符串对象的扩展函数showToast，就可以快捷显示Toast了
@@ -272,4 +275,19 @@ fun deleteRecursive(fileOrDirectory: File): Boolean {
         }
     }
     return fileOrDirectory.delete()
+}
+
+
+inline fun <reified T : Parcelable> Intent.parcelable(key: String): T? = when {
+    SDK_INT >= 33 -> getParcelableExtra(key, T::class.java)
+    else -> @Suppress("DEPRECATION") getParcelableExtra(key) as? T
+}
+
+fun isEmailFormat(emailStr: String): Boolean {
+    if (emailStr.isNotEmpty()) {
+        val pattern = Pattern.compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}\$\n")
+        val match = pattern.matcher(emailStr)
+        return match.matches()
+    }
+    return false
 }
