@@ -1,6 +1,5 @@
 package com.xhr.fzp.ui.question
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,8 +41,6 @@ class QuestionAdapter(private val questionList: List<Question>, private val frag
         when (question.review) {
             1 -> {
                 holder.answerShow.visibility = View.VISIBLE
-
-                LogUtil.d(this, "111111111111111111111111111")
                 holder.itemView.setOnClickListener {
                     fragment.activity?.let {
                         LogUtil.d(this, "question.id: " + question.id)

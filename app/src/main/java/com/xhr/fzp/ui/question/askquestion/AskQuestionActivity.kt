@@ -63,8 +63,8 @@ class AskQuestionActivity : BaseActivity<ActivityAskQuestionBinding>() {
                 val user = viewModel.getUserInfo()
                 viewModel.sendAskQuestion(Question(questionContent,  user))
             }
+            sendFlag = false
         }
-        sendFlag = false
     }
 
 

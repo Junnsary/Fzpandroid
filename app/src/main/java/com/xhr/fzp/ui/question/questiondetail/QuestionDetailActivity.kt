@@ -2,13 +2,11 @@ package com.xhr.fzp.ui.question.questiondetail
 
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.IBinder
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import androidx.annotation.RequiresApi
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -44,7 +42,6 @@ class QuestionDetailActivity : BaseActivity<ActivityQuestionDetailBinding>() {
                 viewModel.answerList.clear()
                 viewModel.answerList.addAll(data)
                 adapter.notifyDataSetChanged()
-                binding.tvAnswerNum.text = data.size.toString()
             }
         }
 
@@ -52,6 +49,8 @@ class QuestionDetailActivity : BaseActivity<ActivityQuestionDetailBinding>() {
             result.onSuccess {
                 viewModel.answerList.add(0, answer)
                 adapter.notifyDataSetChanged()
+                binding.nsContent.scrollTo(0, binding.tvQuestionDetailcontent.top)
+                binding.tvAnswerNum.text = viewModel.answerList.size.toString()
                 "添加回答成功！".showToast()
             }
             result.onFailure {
@@ -75,6 +74,8 @@ class QuestionDetailActivity : BaseActivity<ActivityQuestionDetailBinding>() {
             binding.tvQuestionDetailcontent.text = it.content
             useGlideSetImage(this, FzpServiceCreator.getNetworkImageURL(it.user.avatar), binding.ivQuestionDetailUserAvatar)
             binding.tvAnswerNum.text = it.answerNum.toString()
+            LogUtil.d(this, it.toString())
+            LogUtil.d(this, it.id.toString())
             viewModel.getAnswerList(it.id)
         }
     }
