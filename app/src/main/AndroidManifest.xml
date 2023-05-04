@@ -37,9 +37,7 @@
         <activity
             android:name=".ui.search.SearchActivity"
             android:exported="false" />
-        <activity
-            android:name=".ui.search.SearchFragment"
-            android:exported="false" />
+
         <activity
             android:name=".ui.personal.PersonalActivity"
             android:exported="false" />
