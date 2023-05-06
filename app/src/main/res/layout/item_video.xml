@@ -34,8 +34,7 @@
                         android:id="@+id/iv_video_cover"
                         style="@style/cover_image_style"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@mipmap/image_test2" />
+                        android:layout_height="match_parent"/>
                 </androidx.cardview.widget.CardView>
 
                 <RelativeLayout

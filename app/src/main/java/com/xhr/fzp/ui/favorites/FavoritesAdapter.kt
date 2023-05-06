@@ -13,6 +13,7 @@ import com.xhr.fzp.logic.model.Favorites
 import com.xhr.fzp.logic.network.FzpServiceCreator
 import com.xhr.fzp.ui.detail.DetailActivity
 import com.xhr.fzp.utils.formatDate
+import com.xhr.fzp.utils.setMarginBottom
 import com.xhr.fzp.utils.useGlideSetImage
 
 class FavoritesAdapter(
@@ -38,6 +39,7 @@ class FavoritesAdapter(
     }
 
     override fun onBindViewHolder(holder: FavoritesHolder, position: Int) {
+        setMarginBottom(position, favoritesList, holder, 10)
         val favorites = favoritesList[position]
         if (favorites.tag.type == "article") {
             holder.itemView.setOnClickListener {

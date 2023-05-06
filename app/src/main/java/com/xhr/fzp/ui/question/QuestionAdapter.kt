@@ -13,6 +13,7 @@ import com.xhr.fzp.logic.network.FzpServiceCreator
 import com.xhr.fzp.ui.question.questiondetail.QuestionDetailActivity
 import com.xhr.fzp.utils.LogUtil
 import com.xhr.fzp.utils.formatDateTime
+import com.xhr.fzp.utils.setMarginBottom
 import com.xhr.fzp.utils.useGlideSetImage
 import de.hdodenhof.circleimageview.CircleImageView
 
@@ -37,6 +38,7 @@ class QuestionAdapter(private val questionList: List<Question>, private val frag
     }
 
     override fun onBindViewHolder(holder: QuestionHolder, position: Int) {
+        setMarginBottom(position, questionList, holder, 10)
         val question = questionList[position]
         when (question.review) {
             1 -> {

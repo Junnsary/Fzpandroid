@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Build.VERSION.SDK_INT
 import android.os.Parcelable
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -15,6 +16,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
@@ -285,4 +287,15 @@ inline fun <reified T : Parcelable> Intent.parcelable(key: String): T? = when {
 fun isEmailFormat(emailStr: String): Boolean {
     val emailRegex = Regex("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\$")
     return emailRegex.matches(emailStr)
+}
+
+fun setMarginBottom(position: Int, sourcesList: List<Any>, holder: ViewHolder, marginValue: Int) {
+    if (position == (sourcesList.size - 1)) {
+        val layoutParams = holder.itemView.layoutParams as ViewGroup.MarginLayoutParams
+        val resources = FzpApplication.context.resources
+        val density = resources.displayMetrics.density
+        val pixels = (marginValue * density + 0.5f).toInt()
+        layoutParams.setMargins(pixels, pixels, pixels, pixels)
+        holder.itemView.layoutParams = layoutParams
+    }
 }

@@ -1,17 +1,23 @@
 package com.xhr.fzp.ui.source
 
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.load.engine.Resource
+import com.google.android.material.card.MaterialCardView
 import com.xhr.fzp.R
 import com.xhr.fzp.logic.model.Source
 import com.xhr.fzp.ui.detail.DetailActivity
 import com.xhr.fzp.utils.formatDate
 import com.xhr.fzp.utils.setCoverImageOfSource
+import com.xhr.fzp.utils.setMarginBottom
 
 class SourceAdapter(private val fragment: Fragment, private val sourcesList: ArrayList<Source>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
@@ -52,6 +58,7 @@ class SourceAdapter(private val fragment: Fragment, private val sourcesList: Arr
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        setMarginBottom(position, sourcesList, holder, 10)
         val source = sourcesList[position]
         when (holder) {
             is ArticleHolder -> {

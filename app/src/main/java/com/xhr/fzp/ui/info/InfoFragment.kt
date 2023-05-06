@@ -40,6 +40,7 @@ class InfoFragment : BaseFragment<FragmentInfoBinding> {
         const val ARTICLEVIDEO = "articlevideo"
 
         fun getVideoCase(sum: Boolean = false) = InfoFragment(ARTICLE, CASE, sum)
+        fun getCase(sum: Boolean = false) = InfoFragment("", CASE, sum)
         fun getVideoArticleCase(sum: Boolean = false) = InfoFragment(ARTICLEVIDEO, CASE, sum)
     }
 
