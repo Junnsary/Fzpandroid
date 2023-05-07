@@ -37,7 +37,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
         }
 
         binding.vpHome.isUserInputEnabled = false
-        binding.vpHome.offscreenPageLimit = 1
+        binding.vpHome.offscreenPageLimit = 4
         binding.bnvHome.setOnItemSelectedListener { v ->
             when (v.itemId) {
                 R.id.menu_item_study -> {

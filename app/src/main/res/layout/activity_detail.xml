@@ -79,7 +79,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0.1dp"
-        android:layout_marginTop="15dp"
         android:background="@color/dividing_line_color" />
 
     <LinearLayout

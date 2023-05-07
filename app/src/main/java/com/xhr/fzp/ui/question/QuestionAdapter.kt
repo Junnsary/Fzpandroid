@@ -38,7 +38,7 @@ class QuestionAdapter(private val questionList: List<Question>, private val frag
     }
 
     override fun onBindViewHolder(holder: QuestionHolder, position: Int) {
-        setMarginBottom(position, questionList, holder, 10)
+        setMarginBottom(position, questionList, holder, 10, itemCount)
         val question = questionList[position]
         when (question.review) {
             1 -> {

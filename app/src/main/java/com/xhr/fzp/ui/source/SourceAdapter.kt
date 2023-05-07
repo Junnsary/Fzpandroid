@@ -58,7 +58,7 @@ class SourceAdapter(private val fragment: Fragment, private val sourcesList: Arr
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        setMarginBottom(position, sourcesList, holder, 10)
+        setMarginBottom(position, sourcesList, holder, 10, itemCount)
         val source = sourcesList[position]
         when (holder) {
             is ArticleHolder -> {

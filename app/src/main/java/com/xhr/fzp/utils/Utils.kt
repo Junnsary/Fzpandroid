@@ -30,6 +30,7 @@ import com.xhr.fzp.logic.model.Source
 import com.xhr.fzp.logic.model.Tag
 import com.xhr.fzp.logic.network.FzpServiceCreator
 import com.xhr.fzp.logic.room.entity.Save
+import com.xhr.fzp.ui.source.SourceAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -183,7 +184,7 @@ fun setCoverImageOfSource(imageName: String, imageView: ImageView, context: Cont
                     val b = Bitmap.createScaledBitmap(resource, W, H, false)
                     imageView.setImageBitmap(b)
                     //保存在本地 bitmap在本地
-                    ExternalStorageDao.cachedImagesByBitmap(imageName,b)
+                    ExternalStorageDao.cachedImagesByBitmap(imageName, b)
                 }
 
                 override fun onLoadCleared(placeholder: Drawable?) {}
@@ -195,7 +196,7 @@ fun setCoverImageOfSource(imageName: String, imageView: ImageView, context: Cont
  * 设置toolbar的返回按钮
  */
 
-fun AppCompatActivity.setToolbar(toolbar: Toolbar, title : String = "") {
+fun AppCompatActivity.setToolbar(toolbar: Toolbar, title: String = "") {
     setSupportActionBar(toolbar)
     supportActionBar?.let {
         it.title = title
@@ -207,17 +208,21 @@ fun AppCompatActivity.setToolbar(toolbar: Toolbar, title : String = "") {
  * 格式化日期
  */
 
-fun formatDate(date: Date) : String {
+fun formatDate(date: Date): String {
     val sdf = SimpleDateFormat("YYYY-MM-dd")
     return sdf.format(date.time)
 }
 
-fun formatDateTime(date: Date) : String {
+fun formatDateTime(date: Date): String {
     val sdf = SimpleDateFormat("YYYY-MM-dd HH:mm")
     return sdf.format(date.time)
 }
 
-fun <T> LiveData<Result<T>>.observeResult(lifecycleOwner: LifecycleOwner, onSuccess: (T) -> Unit, onFailure: (e: Throwable) -> Unit) {
+fun <T> LiveData<Result<T>>.observeResult(
+    lifecycleOwner: LifecycleOwner,
+    onSuccess: (T) -> Unit,
+    onFailure: (e: Throwable) -> Unit
+) {
     observe(lifecycleOwner) { result ->
         result.onSuccess {
             onSuccess(it)
@@ -289,13 +294,32 @@ fun isEmailFormat(emailStr: String): Boolean {
     return emailRegex.matches(emailStr)
 }
 
-fun setMarginBottom(position: Int, sourcesList: List<Any>, holder: ViewHolder, marginValue: Int) {
-    if (position == (sourcesList.size - 1)) {
+fun setMarginBottom(
+    position: Int,
+    sourcesList: List<Any>,
+    holder: ViewHolder,
+    marginValue: Int,
+    getCount: Int
+) {
+
+//    LogUtil.d(Pair<String, String>("123", "123"), "size: ${getCount}, position: ${position}")
+    try {
         val layoutParams = holder.itemView.layoutParams as ViewGroup.MarginLayoutParams
         val resources = FzpApplication.context.resources
         val density = resources.displayMetrics.density
         val pixels = (marginValue * density + 0.5f).toInt()
-        layoutParams.setMargins(pixels, pixels, pixels, pixels)
-        holder.itemView.layoutParams = layoutParams
+        if (position == getCount - 1) {
+            LogUtil.d(Pair<String, String>("123", "123"), "最后一个： size: ${getCount}, position: ${position}")
+            layoutParams.setMargins(pixels, pixels, pixels, pixels)
+            holder.itemView.layoutParams = layoutParams
+        } else {
+            LogUtil.d(Pair<String, String>("123", "123"), "不是最后一个： size: ${getCount}, position: ${position}")
+            layoutParams.setMargins(pixels, pixels, pixels, 0)
+            holder.itemView.layoutParams = layoutParams
+        }
+    } catch (e: Exception) {
+        e.printStackTrace()
     }
+
+
 }

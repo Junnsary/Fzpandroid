@@ -39,7 +39,7 @@ class FavoritesAdapter(
     }
 
     override fun onBindViewHolder(holder: FavoritesHolder, position: Int) {
-        setMarginBottom(position, favoritesList, holder, 10)
+        setMarginBottom(position, favoritesList, holder, 10, itemCount)
         val favorites = favoritesList[position]
         if (favorites.tag.type == "article") {
             holder.itemView.setOnClickListener {
