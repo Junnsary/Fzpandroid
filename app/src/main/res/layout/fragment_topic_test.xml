@@ -7,10 +7,6 @@
     tools:context=".ui.topictest.TopicTestFragment"
     android:orientation="vertical">
 
-<!--    <WebView-->
-<!--        android:id="@+id/wv_topic_test"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"/>-->
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -66,7 +62,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textColor="@color/black"
-                    android:text="        此外，通过检测防诈骗知识的题目，您还可以更好地了解当前诈骗手段的特点和模式。这将帮助您在未来更容易地识别和规避潜在的诈骗行为。"/>
+                    android:text="        此外，通过防诈骗知识题目的测试，您还可以更好地了解当前诈骗手段的特点和模式。这将帮助您在未来更容易地识别和规避潜在的诈骗行为。"/>
 
             </LinearLayout>
             <Button

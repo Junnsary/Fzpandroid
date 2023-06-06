@@ -64,6 +64,8 @@ class AskQuestionActivity : BaseActivity<ActivityAskQuestionBinding>() {
                 viewModel.sendAskQuestion(Question(questionContent,  user))
             }
             sendFlag = false
+        } else {
+            "请输入提问内容再发送".showToast()
         }
     }
 

@@ -1,12 +1,17 @@
 package com.xhr.fzp.ui.search
 
+import android.content.Context
+import android.inputmethodservice.InputMethodService
+import android.view.KeyEvent
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.core.view.isGone
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.xhr.fzp.base.BaseFragment
 import com.xhr.fzp.databinding.FragmentSearchBinding
 import com.xhr.fzp.ui.source.SourceAdapter
+import com.xhr.fzp.utils.showToast
 import javax.xml.transform.Source
 
 class SearchFragment : BaseFragment<FragmentSearchBinding>(){
@@ -37,10 +42,32 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(){
 
     override fun initListener() {
         binding.btnSearchSend.setOnClickListener {
-            val keywords = binding.etSearchKeywords.text.toString().trim()
-            if (keywords.isNotEmpty()) {
-                viewModel.getSearchList(keywords)
+            searchContent()
+        }
+        binding.etSearchKeywords.setOnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                searchContent()
+                true
             }
+            false
+        }
+    }
+
+
+    private fun searchContent() {
+        val keywords = binding.etSearchKeywords.text.toString().trim()
+        if (keywords.isNotEmpty()) {
+            viewModel.getSearchList(keywords)
+        } else {
+            "请输入内容".showToast()
+        }
+        hideKeyboard()
+    }
+
+    private fun hideKeyboard() {
+        activity?.let {
+            val systemService = it.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            systemService.hideSoftInputFromWindow(it.window.decorView.windowToken, 0)
         }
     }
 }

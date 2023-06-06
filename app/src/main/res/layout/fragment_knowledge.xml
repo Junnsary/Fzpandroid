@@ -104,7 +104,7 @@
         android:layout_height="wrap_content"
         style="@style/text_default_style"
         android:textSize="15sp"
-        android:text="推荐"/>
+        android:text="推荐学习"/>
 
     <FrameLayout
         android:id="@+id/fl_recommendation"

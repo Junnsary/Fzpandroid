@@ -39,6 +39,17 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_comment"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="match_parent"/>
+
+    <TextView
+        android:id="@+id/tv_not_comment"
+        android:layout_width="match_parent"
+        android:gravity="center_horizontal"
+        android:text="暂无相关评论..."
+        android:textSize="18sp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="25dp"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

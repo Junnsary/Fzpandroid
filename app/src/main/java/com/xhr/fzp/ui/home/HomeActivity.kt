@@ -24,7 +24,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
     override fun initView() {
         setSupportActionBar(binding.tbHome)
         supportActionBar?.let {
-            it.title = "学习"
+            it.title = "学习防诈骗知识"
         }
         binding.vpHome.adapter = object : FragmentStateAdapter(this) {
             override fun getItemCount(): Int {
@@ -42,28 +42,28 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
             when (v.itemId) {
                 R.id.menu_item_study -> {
                     binding.vpHome.setCurrentItem(0, false)
-                    binding.tbHome.title = getString(R.string.activity_mian_study_str)
+                    binding.tbHome.title = "学习防诈骗知识"
                     binding.tbHome.elevation = 0f
                     binding.tbHome.menu.findItem(R.id.action_search).isVisible = true
                     binding.tbHome.menu.findItem(R.id.action_question).isVisible = false
                 }
                 R.id.menu_item_case -> {
                     binding.vpHome.setCurrentItem(1, false)
-                    binding.tbHome.title = getString(R.string.activity_main_case_str)
+                    binding.tbHome.title = "了解诈骗案例"
                     binding.tbHome.elevation = 0f
                     binding.tbHome.menu.findItem(R.id.action_search).isVisible = true
                     binding.tbHome.menu.findItem(R.id.action_question).isVisible = false
                 }
                 R.id.menu_item_search -> {
                     binding.vpHome.setCurrentItem(2, false)
-                    binding.tbHome.title = getString(R.string.menu_home_bnv_qa_str)
+                    binding.tbHome.title = "问答交流学习"
                     binding.tbHome.elevation = 5f
                     binding.tbHome.menu.findItem(R.id.action_search).isVisible = false
                     binding.tbHome.menu.findItem(R.id.action_question).isVisible = true
                 }
                 R.id.menu_item_topic_test -> {
                     binding.vpHome.setCurrentItem(3, false)
-                    binding.tbHome.title = getString(R.string.menu_home_bnv_test_str)
+                    binding.tbHome.title = "防诈骗知识题目测试"
                     binding.tbHome.elevation = 5f
                     binding.tbHome.menu.findItem(R.id.action_search).isVisible = false
                     binding.tbHome.menu.findItem(R.id.action_question).isVisible = false

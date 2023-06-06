@@ -39,9 +39,14 @@ class QuestionDetailActivity : BaseActivity<ActivityQuestionDetailBinding>() {
     override fun initData() {
         viewModel.answerListLD.observe(this) { result ->
             result.onSuccess { data ->
-                viewModel.answerList.clear()
-                viewModel.answerList.addAll(data)
-                adapter.notifyDataSetChanged()
+                if (data.isNotEmpty()) {
+                    binding.rvAnswer.visibility = View.VISIBLE
+                    binding.tvNotAnswer.visibility = View.GONE
+                    viewModel.answerList.clear()
+                    viewModel.answerList.addAll(data)
+                    adapter.notifyDataSetChanged()
+                }
+
             }
         }
 

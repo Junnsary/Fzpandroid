@@ -6,34 +6,6 @@
     android:background="#ffffff"
     android:orientation="vertical">
 
-    <!--    <RelativeLayout-->
-    <!--        android:id="@+id/rl_actionbar"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="50dp">-->
-
-    <!--        <TextView-->
-    <!--            android:id="@+id/tv_return"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_alignParentStart="true"-->
-    <!--            android:layout_centerVertical="true"-->
-    <!--            android:text="返回" />-->
-
-    <!--        <TextView-->
-    <!--            android:id="@+id/tv_type_title"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_centerInParent="true" />-->
-
-    <!--        <TextView-->
-    <!--            android:id="@+id/tv_collect"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_alignParentEnd="true"-->
-    <!--            android:layout_centerVertical="true"-->
-    <!--            android:text="收藏" />-->
-    <!--    </RelativeLayout>-->
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tl_detail"
         style="@style/toolbar_default_style"
@@ -65,7 +37,7 @@
                 android:id="@+id/fl_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="100dp" />
+                android:minHeight="200dp" />
 
             <FrameLayout
                 android:id="@+id/fl_source_comment"

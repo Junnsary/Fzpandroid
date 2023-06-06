@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tl_question_detail"
         style="@style/toolbar_default_style"
-        app:contentInsetStart="0dp"
-        android:elevation="5dp">
+        android:elevation="5dp"
+        app:contentInsetStart="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,36 +30,36 @@
             </LinearLayout>
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tv_question_detail_user_name"
+                    style="@style/text_default_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/text_default_style"
                     android:text="萧宏润" />
 
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:layout_height="wrap_content">
+                    android:orientation="horizontal">
 
                     <TextView
+                        style="@style/bottom_date_style"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="@style/bottom_date_style"
-                        android:text="发布于  "/>
+                        android:text="发布于  " />
 
                     <TextView
                         android:id="@+id/tv_question_detail_date"
+                        style="@style/bottom_date_style"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="@style/bottom_date_style"
-                        android:text="22-10-01"/>
+                        android:text="22-10-01" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -73,52 +73,67 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tv_question_detailcontent"
+                style="@style/text_default_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp"
-                android:textSize="16sp"
-                style="@style/text_default_style"
-                android:text="这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容"/>
+                android:text="这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容"
+                android:textSize="16sp" />
 
             <View
-                android:layout_marginTop="10dp"
-                style="@style/dividing_line"/>
+                style="@style/dividing_line"
+                android:layout_marginTop="10dp" />
 
             <LinearLayout
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal"
-                android:layout_marginBottom="15dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:orientation="horizontal">
+
                 <TextView
+                    style="@style/comment_num_text_style"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/comment_num_text_style"
-                    android:text="共 "/>
+                    android:text="共 " />
+
                 <TextView
                     android:id="@+id/tv_answer_num"
+                    style="@style/comment_num_text_style"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/comment_num_text_style"
-                    android:text="0"/>
+                    android:text="0" />
+
                 <TextView
+                    style="@style/comment_num_text_style"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/comment_num_text_style"
-                    android:text=" 条回答"/>
+                    android:text=" 条回答" />
             </LinearLayout>
+            <TextView
+                android:id="@+id/tv_not_answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="25dp"
+                android:gravity="center_horizontal"
+                android:text="暂无相关回答..."
+                android:textSize="18sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_answer"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:visibility="invisible" />
+
+
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
@@ -155,11 +170,11 @@
             android:layout_width="70dp"
             android:layout_height="35dp"
             android:layout_gravity="center"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
             android:background="@drawable/comment_send_btn_shape"
             android:text="发送"
             android:textColor="@color/theme_white_fa"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
             android:visibility="gone" />
 
     </LinearLayout>

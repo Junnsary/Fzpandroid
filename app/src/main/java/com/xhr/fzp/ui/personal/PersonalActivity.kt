@@ -7,6 +7,8 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -91,30 +93,7 @@ class PersonalActivity : BaseActivity<ActivityPersonalBinding>() {
 
     override fun initView() {
         setToolbar(binding.tlPersonal, "个人信息")
-        binding.tlPersonal.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.action_personal_modify -> {
-                    edit()
-                }
 
-                R.id.action_personal_cancel -> {
-                    cancel()
-                }
-
-                R.id.action_personal_done -> {
-                    save()
-                }
-            }
-            true
-        }
-
-        binding.rlModifyAvatar.setOnClickListener {
-            if (Build.VERSION.SDK_INT >= 33) {
-                requestPermissionLauncher.launch(Manifest.permission.READ_MEDIA_IMAGES)
-            } else {
-                requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
-            }
-        }
 
         //设置个人信息
         setUserInfo()
@@ -156,7 +135,46 @@ class PersonalActivity : BaseActivity<ActivityPersonalBinding>() {
     }
 
     override fun initListener() {
+        binding.tvEditUserName.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                nameFlag = true
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+        binding.tvEditUserEmail.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                emailFlag = true
+            }
+            override fun afterTextChanged(s: Editable?) {
+            }
+        })
 
+        binding.tlPersonal.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.action_personal_modify -> {
+                    edit()
+                }
+
+                R.id.action_personal_cancel -> {
+                    cancel()
+                }
+
+                R.id.action_personal_done -> {
+                    save()
+                }
+            }
+            true
+        }
+
+        binding.rlModifyAvatar.setOnClickListener {
+            if (Build.VERSION.SDK_INT >= 33) {
+                requestPermissionLauncher.launch(Manifest.permission.READ_MEDIA_IMAGES)
+            } else {
+                requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -185,47 +203,50 @@ class PersonalActivity : BaseActivity<ActivityPersonalBinding>() {
         binding.tvEditUserName.visibility = View.VISIBLE
         binding.tvEditUserEmail.setText(binding.tvUserEmail.text.toString())
         binding.tvEditUserName.setText(binding.tvUserName.text.toString())
-
-
+        nameFlag = false
+        emailFlag = false
         binding.tvUserEmail.visibility = View.GONE
         binding.tvUserName.visibility = View.GONE
         binding.tlPersonal.menu.findItem(R.id.action_personal_modify).isVisible = false
     }
 
     private fun save() {
-        val name = binding.tvEditUserName.text.toString().trim()
-        val email = binding.tvEditUserEmail.text.toString().trim()
-        val verify = ArrayList<String>()
-//        LogUtil.d(this, email)
-        if (!isEmailFormat(email)) {
-            verify.add("邮箱格式不正确")
-        }
-
-        if (name.isEmpty()) {
-            verify.add("请输入用户姓名")
-        }
-
-        if (verify.isEmpty()) {
-            val user = viewModel.getSavedUser()
-            if (avatarFile == null) {
-                viewModel.editUser(PersonalViewModel.EditUserInfo(null, name, email, user.id) )
-            } else {
-                val avatar = MultipartBody.Part.createFormData("avatar", avatarFile!!.name, RequestBody.create(
-                    MediaType.parse("multipart/form-data"), avatarFile!!))
-                viewModel.editUser(PersonalViewModel.EditUserInfo(avatar, name, email, user.id) )
-            }
-
-            loadingDialog = LoadingDialog(this, "正在保存")
-            loadingDialog.show()
+        if (!nameFlag && !emailFlag && avatarFile == null) {
+            cancel()
+            "无修改信息".showToast()
         } else {
-            val sb = StringBuilder()
-            verify.forEach {
-                sb.append("${it}\n")
+            val name = binding.tvEditUserName.text.toString().trim()
+            val email = binding.tvEditUserEmail.text.toString().trim()
+            val verify = ArrayList<String>()
+//        LogUtil.d(this, email)
+            if (!isEmailFormat(email)) {
+                verify.add("邮箱格式不正确")
             }
-            val dialog = createDialog(sb.toString())
-            dialog.show()
-        }
 
+            if (name.isEmpty()) {
+                verify.add("请输入用户姓名")
+            }
+
+            if (verify.isEmpty()) {
+                val user = viewModel.getSavedUser()
+                if (avatarFile == null) {
+                    viewModel.editUser(PersonalViewModel.EditUserInfo(null, name, email, user.id) )
+                } else {
+                    val avatar = MultipartBody.Part.createFormData("avatar", avatarFile!!.name, RequestBody.create(
+                        MediaType.parse("multipart/form-data"), avatarFile!!))
+                    viewModel.editUser(PersonalViewModel.EditUserInfo(avatar, name, email, user.id) )
+                }
+                loadingDialog = LoadingDialog(this, "正在保存")
+                loadingDialog.show()
+            } else {
+                val sb = StringBuilder()
+                verify.forEach {
+                    sb.append("${it}\n")
+                }
+                val dialog = createDialog(sb.toString())
+                dialog.show()
+            }
+        }
     }
 
     private fun cancel() {

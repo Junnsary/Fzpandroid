@@ -21,7 +21,7 @@ class TopicTestFragment : BaseFragment<FragmentTopicTestBinding>() {
             activity?.let {
                 UserContext.login(it) {
                     val user = viewModel.getUserInfo()
-                    WebShowActivity.actionStart(it, FzpServiceCreator.getTopiTestUrl("topictest?userid=${user.id}"), "开始测试")
+                    WebShowActivity.actionStart(it, FzpServiceCreator.getTopiTestUrl("topictest?userid=${user.id}"), "测试进行中")
                 }
             }
         }
