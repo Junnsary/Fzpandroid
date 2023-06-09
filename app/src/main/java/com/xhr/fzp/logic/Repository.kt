@@ -264,6 +264,4 @@ object Repository {
         val result = FzpNetwork.addAnswer(answer)
         Result.success(result.success)
     }
-
-
 }

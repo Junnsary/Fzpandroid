@@ -290,7 +290,7 @@ inline fun <reified T : Parcelable> Intent.parcelable(key: String): T? = when {
 }
 
 fun isEmailFormat(emailStr: String): Boolean {
-    val emailRegex = Regex("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\$")
+    val emailRegex = Regex("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}\$")
     return emailRegex.matches(emailStr)
 }
 

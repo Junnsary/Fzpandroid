@@ -31,6 +31,7 @@ class ArticleVideoActivity : BaseActivity<ActivityArticleVideoBinding>() {
     private lateinit var type: String
     override fun initData() {
         type = intent.getStringExtra(TYPE)!!
+
         viewModel.getArticleVideoTagLD.observe(this) { result ->
             result.onSuccess { it ->
                 binding.srlRefreshTag.isEnabled = false
@@ -67,7 +68,9 @@ class ArticleVideoActivity : BaseActivity<ActivityArticleVideoBinding>() {
                 binding.srlRefreshTag.isRefreshing = false
             }
         }
+
         viewModel.getArticleVideoTag()
+
     }
 
     override fun initView() {

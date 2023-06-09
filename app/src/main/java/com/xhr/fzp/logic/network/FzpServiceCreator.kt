@@ -37,6 +37,9 @@ object FzpServiceCreator {
         return BASE_URL + PUBLIC_VIDEO + fileName
     }
 
+    /**
+     * 创建retrofit对象
+     */
     private val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
