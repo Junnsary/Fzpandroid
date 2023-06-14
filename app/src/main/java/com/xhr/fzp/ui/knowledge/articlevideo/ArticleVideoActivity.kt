@@ -23,15 +23,12 @@ class ArticleVideoActivity : BaseActivity<ActivityArticleVideoBinding>() {
             context.startActivity(intent)
         }
     }
-
     private val tags = arrayOf("文章学习", "视频学习")
     private val fragments = ArrayList<SourceFragment>()
-
     val viewModel by lazy { ViewModelProvider(this)[ArticleVideoViewModel::class.java] }
     private lateinit var type: String
     override fun initData() {
         type = intent.getStringExtra(TYPE)!!
-
         viewModel.getArticleVideoTagLD.observe(this) { result ->
             result.onSuccess { it ->
                 binding.srlRefreshTag.isEnabled = false
@@ -68,11 +65,8 @@ class ArticleVideoActivity : BaseActivity<ActivityArticleVideoBinding>() {
                 binding.srlRefreshTag.isRefreshing = false
             }
         }
-
         viewModel.getArticleVideoTag()
-
     }
-
     override fun initView() {
         binding.srlRefreshTag.isEnabled = false
         setSupportActionBar(binding.tlArticleVideo)
@@ -81,13 +75,11 @@ class ArticleVideoActivity : BaseActivity<ActivityArticleVideoBinding>() {
             it.title = "学习区"
         }
     }
-
     override fun initListener() {
         binding.srlRefreshTag.setOnRefreshListener {
             viewModel.getArticleVideoTag()
         }
     }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home ->

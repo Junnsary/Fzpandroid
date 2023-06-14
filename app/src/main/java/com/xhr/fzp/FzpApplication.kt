@@ -9,6 +9,7 @@ class FzpApplication : Application(){
         @SuppressLint("StaticFieldLeak")
         lateinit var context: Context
     }
+
     override fun onCreate() {
         super.onCreate()
         context = applicationContext

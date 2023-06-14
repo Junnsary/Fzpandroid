@@ -20,5 +20,4 @@ class ArticleVideoViewModel : ViewModel(){
             articleVideoTagLD.value = articleVideoTagLD.value
         }
     }
-
 }

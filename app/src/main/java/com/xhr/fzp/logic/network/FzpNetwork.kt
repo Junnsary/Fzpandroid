@@ -15,7 +15,6 @@ import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 object FzpNetwork {
-
     /**
      * 获取动态动态代理对象
      */
@@ -29,8 +28,6 @@ object FzpNetwork {
     private val questionService = FzpServiceCreator.create<QuestionService>()
     private val answerService = FzpServiceCreator.create<AnswerService>()
     private val userTopicService = FzpServiceCreator.create<UserTopicService>()
-
-
     /**
      * 获取api接口数据
      */
@@ -38,16 +35,13 @@ object FzpNetwork {
     suspend fun getKnowledge() = tagService.getKnowledge().await()
     suspend fun getSourceList(type: String, tagId: String) =
         sourceService.getSourceList(type, tagId).await()
-
     suspend fun getRecommList(num: Int) = sourceService.getRecommList(num).await()
     suspend fun userSignup(user: User) =
         userService.userSignup(user.id, user.email, user.name, user.passwd).await()
-
     suspend fun userLogin(user: User) = userService.userLogin(user.id, user.passwd).await()
     suspend fun getAvatar(fileName: String) = imageService.getAvatar(fileName).await()
     suspend fun getCommentList(sourceId: Int, tagId: Int) =
         commentService.getCommentList(sourceId, tagId).await()
-
     suspend fun getVideoInfo(sourceId: Int) = videoService.getVideoInfo(sourceId).await()
     suspend fun isUserCollect(favoritesData: DetailViewModel.FavoritesData) =
         favoritesService.isUserCollect(
@@ -105,7 +99,6 @@ object FzpNetwork {
     suspend fun editUserInfo(userName: String, userEmail: String, userId: String) =
         userService.editUserInfo(userName, userEmail, userId).await()
 
-
     private suspend fun <T> Call<T>.await() = suspendCoroutine { continuation ->
         enqueue(object : Callback<T> {
             override fun onResponse(call: Call<T>, response: Response<T>) {
@@ -122,6 +115,4 @@ object FzpNetwork {
             }
         })
     }
-
-
 }

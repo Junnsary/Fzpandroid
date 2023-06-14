@@ -17,10 +17,6 @@
         android:elevation="5dp"
         android:layout_centerInParent="true">
 
-
-<!--        <p>自测防诈骗知识的题目的主要目的是帮助您了解自己的防诈骗能力和水平。</p>
-                    <p>这样，您就可以确定哪些方面需要进一步加强，以提高您在遇到诈骗尝试时做出正确决策的能力。</p>
-                    <p>此外，通过检测防诈骗知识的题目，您还可以更好地了解当前诈骗手段的特点和模式。这将帮助您在未来更容易地识别和规避潜在的诈骗行为。</p>-->
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
@@ -77,8 +73,6 @@
                 android:text="开始测试"/>
 
         </LinearLayout>
-
-
 
     </com.google.android.material.card.MaterialCardView>
 

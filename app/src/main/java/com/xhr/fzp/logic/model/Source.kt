@@ -1,8 +1,6 @@
 package com.xhr.fzp.logic.model
-
 import com.google.gson.annotations.SerializedName
 import java.util.*
-
 open class Source(
     val id: Int,
     val title: String,

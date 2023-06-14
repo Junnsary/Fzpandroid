@@ -11,9 +11,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tl_article_video"
         style="@style/toolbar_default_style">
-
     </androidx.appcompat.widget.Toolbar>
-
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/srl_refresh_tag"
@@ -24,7 +22,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
             <TextView
                 android:id="@+id/tv_failure"
                 android:layout_width="match_parent"
@@ -33,8 +30,6 @@
                 android:textSize="16sp"
                 android:gravity="center"
                 android:visibility="gone"/>
-
-
             <LinearLayout
                 android:id="@+id/lll_tl_vp"
                 android:layout_width="match_parent"
@@ -52,11 +47,7 @@
                     android:id="@+id/vp2_data_list"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
-
             </LinearLayout>
-
         </LinearLayout>
-
-
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>

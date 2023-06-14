@@ -50,5 +50,4 @@ class DetailViewModel : ViewModel() {
 
     inner class FavoritesData(val sourceId: Int, val tagId: Int, val userId:String)
     inner class CommentData(val sourceId: Int, val tagId: Int, val userId: String, val content: String)
-
 }

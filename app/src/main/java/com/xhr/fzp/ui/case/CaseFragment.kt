@@ -9,10 +9,8 @@ import com.xhr.fzp.utils.replaceFragment
 
 class CaseFragment :  BaseFragment<FragmentCaseBinding>(){
 
-    val viewModel by lazy { ViewModelProvider(this)[CaseViewModel::class.java]}
     override fun initView() {
         val infoFragment = InfoFragment.getCase(true)
         replaceFragment(R.id.fl_video_case, infoFragment)
     }
-
 }

@@ -25,13 +25,11 @@ class InfoFragment : BaseFragment<FragmentInfoBinding> {
     private val type: String
     private val category: String
     private val sum: Boolean
-
     private constructor(type: String, category: String, sum: Boolean) : super() {
         this.type = type
         this.category = category
         this.sum = sum
     }
-
     companion object {
         const val ARTICLE = "article"
         const val VIDEO = "video"
@@ -43,9 +41,7 @@ class InfoFragment : BaseFragment<FragmentInfoBinding> {
         fun getCase(sum: Boolean = false) = InfoFragment("", CASE, sum)
         fun getVideoArticleCase(sum: Boolean = false) = InfoFragment(ARTICLEVIDEO, CASE, sum)
     }
-
     private val viewModel by lazy { ViewModelProvider(this)[InfoViewModel::class.java] }
-
     override fun initData() {
         viewModel.TagListLD.observe(this) { result ->
 
@@ -75,7 +71,6 @@ class InfoFragment : BaseFragment<FragmentInfoBinding> {
                     }.attach()
                 }
             }
-
             result.onFailure {
                 binding.tvFailure.visibility = View.VISIBLE
                 binding.llTlVp.visibility = View.GONE
@@ -95,7 +90,4 @@ class InfoFragment : BaseFragment<FragmentInfoBinding> {
             viewModel.getTagList(type, category)
         }
     }
-
-
-
 }

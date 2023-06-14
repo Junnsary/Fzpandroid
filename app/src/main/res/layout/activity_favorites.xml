@@ -6,7 +6,6 @@
     android:background="@color/theme_white_f3"
     android:orientation="vertical">
 
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tb_favourite"
         style="@style/toolbar_default_style"/>
@@ -23,7 +22,6 @@
             android:layout_height="wrap_content"
             app:tabMode="scrollable" />
 
-
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/srl_refresh_data"
             android:layout_width="match_parent"
@@ -38,6 +36,5 @@
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </LinearLayout>
-
 
 </LinearLayout>

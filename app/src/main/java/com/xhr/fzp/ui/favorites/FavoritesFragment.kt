@@ -22,10 +22,6 @@ class FavoritesFragment : BaseFragment<FragmentFavoritesBinding>() {
     }
 
     override fun initListener() {
-//        binding.srlRefreshData.setOnRefreshListener {
-//            val favoritesActivity = activity as FavoritesActivity
-//            favoritesActivity.refresh()
-//        }
     }
 
 }

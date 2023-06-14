@@ -11,6 +11,7 @@ class SourceViewModel : ViewModel() {
     val mSourceList = ArrayList<Source>()
 
     private val getSourceListLD = MutableLiveData<Pair<String, String>>()
+
     val sourceListLD = getSourceListLD.switchMap { result ->
         Repository.getSourceList(result.first, result.second)
     }

@@ -60,6 +60,4 @@ object FzpServiceCreator {
         // create(String::class.java)
         return create(T::class.java)
     }
-
-
 }

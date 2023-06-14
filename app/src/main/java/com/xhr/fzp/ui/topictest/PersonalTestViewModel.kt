@@ -19,5 +19,4 @@ class PersonalTestViewModel : ViewModel() {
     }
 
     fun getUserInfo() = Repository.getSavedUser()
-
 }

@@ -14,7 +14,6 @@ class InfoViewModel : ViewModel() {
     val TagListLD = getTagListLD.switchMap { result ->
         Repository.getTags(result.first, result.second)
     }
-
     fun getTagList(type: String, category: String){
         getTagListLD.value = Pair(type, category)
     }

@@ -239,7 +239,6 @@ object Repository {
         }
     }
 
-
     fun getQuestionList(userId: String, review: Int) = fire {
         val result = FzpNetwork.getQuestionList(userId, review)
         if (result.success) {

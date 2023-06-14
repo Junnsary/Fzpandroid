@@ -17,8 +17,6 @@ class FavoritesActivity : BaseActivity<ActivityFavoritesBinding>(), IRefresh {
 
     val viewModel by lazy { ViewModelProvider(this)[FavoritesViewModel::class.java] }
 
-//    val viewModel by activityViewModels<FavoritesViewModel>()
-
     override fun initData() {
         viewModel.favoritesListLD.observe(this) { result ->
             val data = result.getOrNull()
@@ -72,5 +70,4 @@ class FavoritesActivity : BaseActivity<ActivityFavoritesBinding>(), IRefresh {
     override fun stopRefresh() {
         binding.srlRefreshData.isRefreshing = false
     }
-
 }

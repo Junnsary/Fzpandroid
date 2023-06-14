@@ -32,7 +32,5 @@ class QuestionFragment(private val userId: String, private val review: Int): Bas
         binding.srlQuestion.setOnRefreshListener {
             viewModel.getQuestionList(userId, review)
         }
-
     }
-
 }

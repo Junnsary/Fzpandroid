@@ -14,7 +14,6 @@ class FavoritesViewModel : ViewModel() {
     val favoritesListLD = getFavoritesListLD.switchMap { result ->
         Repository.getFavoritesList(result)
     }
-
     fun getFavoritesList() {
         val user = Repository.getSavedUser()
         getFavoritesListLD.value = user.id

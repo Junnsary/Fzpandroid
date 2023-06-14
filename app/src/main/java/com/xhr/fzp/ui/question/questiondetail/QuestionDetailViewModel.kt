@@ -18,7 +18,6 @@ class QuestionDetailViewModel : ViewModel() {
         getAnswerListLD.value = questionId
     }
 
-
     private val getAddAnswerLD = MutableLiveData<Answer>()
     val addAnswerLD = getAddAnswerLD.switchMap { result ->
         Repository.addAnswer(result)
